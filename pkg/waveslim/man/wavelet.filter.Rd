@@ -1,0 +1,66 @@
+\name{wavelet.filter}
+\alias{wavelet.filter}
+\title{Higher-Order Wavelet Filters}
+\description{
+  Create a wavelet filter at arbitrary scale.
+}
+\usage{wavelet.filter(wf.name, filter.seq = "L", n = 512) 
+}
+\arguments{
+  \item{wf.name}{Character string of wavelet filter.}
+  \item{filter.seq}{Character string of filter sequence.  \code{H} means
+    high-pass filtering and \code{L} means low-pass filtering.  Sequence
+    is read from right to left.}
+  \item{n}{Length of zero-padded filter.  Frequency resolution will be
+    \code{n}/2+1.}
+}
+\value{
+  Vector of wavelet coefficients.
+}
+\details{
+  Uses \code{cascade} subroutine to compute higher-order wavelet
+  coefficient vector from a given filtering sequence.
+}
+\references{
+  Bruce, A. and H.-Y. Gao (1996).
+  \emph{Applied Wavelet Analysis with S-PLUS},
+  Springer: New York.
+  
+  Doroslovacki, M. L. (1998)
+  On the least asymmetric wavelets,
+  \emph{IEEE Transactions on Signal Processing}, \bold{46}, No. 4,
+  1125-1130.
+  
+  Daubechies, I. (1992)
+  \emph{Ten Lectures on Wavelets},
+  CBMS-NSF Regional Conference Series in Applied Mathematics,
+  SIAM: Philadelphia.
+
+  Morris and Peravali (1999)
+  Minimum-bandwidth discrete-time wavelets,
+  \emph{Signal Processing}, \bold{76}, No. 2, 181-193.
+
+  Nielsen, M. (2001)
+  On the Construction and Frequency Localization of Finite Orthogonal
+  Quadrature Filters,
+  \emph{Journal of Approximation Theory}, \bold{108}, No. 1, 36-52.
+}
+\seealso{
+  \code{\link{squared.gain}}, \code{\link{wave.filter}}.
+}
+\examples{
+## Figure 4.14 in Gencay, Selcuk and Whitcher (2001)
+par(mfrow=c(3,1), mar=c(5-2,4,4-1,2))
+f.seq <- "HLLLLL"
+plot(c(rep(0,33), wavelet.filter("mb4", f.seq), rep(0,33)), type="l",
+     xlab="", ylab="", main="D(4) in black, MB(4) in red")
+lines(c(rep(0,33), wavelet.filter("d4", f.seq), rep(0,33)), col=2)
+plot(c(rep(0,35), -wavelet.filter("mb8", f.seq), rep(0,35)), type="l",
+     xlab="", ylab="", main="D(8) in black, -MB(8) in red")
+lines(c(rep(0,35), wavelet.filter("d8", f.seq), rep(0,35)), col=2)
+plot(c(rep(0,39), wavelet.filter("mb16", f.seq), rep(0,39)), type="l",
+     xlab="", ylab="", main="D(16) in black, MB(16) in red")
+lines(c(rep(0,39), wavelet.filter("d16", f.seq), rep(0,39)), col=2)
+}
+\author{B. Whitcher}
+\keyword{ts}

@@ -1,0 +1,19 @@
+\name{dau}
+\alias{dau}
+\title{Digital Photograph of Ingrid Daubechies}
+\description{
+  A digital photograph of Ingrid Daubechies taken at the 1993 AMS winter
+  meetings in San Antonio, Texas.  The photograph was taken by David
+  Donoho with a Canon XapShot video still frame camera.
+}
+\usage{data(dau)
+}
+\format{A 256 \eqn{\times}{x} 256 matrix.
+}
+\source{S+WAVELETS.
+}
+\references{
+  Bruce, A., and H.-Y. Gao (1996)
+  \emph{Applied Wavelet Analysis with S-PLUS}, Springer: New York.
+}
+\keyword{datasets}
