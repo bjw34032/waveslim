@@ -1,0 +1,50 @@
+\name{mult.loc}
+\alias{mult.loc}
+\title{Wavelet-based Testing and Locating for Variance Change Points}
+\description{
+  This is the major subroutine for \code{\link{testing.hov}}, providing
+  the workhorse algorithm to recursively test and locate multiple
+  variance changes in so-called long memory processes.
+}
+\usage{mult.loc(dwt.list, modwt.list, wf, level, min.coef, debug)
+}
+\arguments{
+  \item{dwt.list}{}
+  \item{modwt.list}{}
+  \item{wf}{
+    Name of the wavelet filter to use in the decomposition.
+  }
+  \item{level}{
+    Specifies the depth of the decomposition.
+  }
+  \item{min.coef}{
+    Minimum number of wavelet coefficients for testing purposes.
+  }
+  \item{debug}{
+    Boolean variable: if set to \code{TRUE}, actions taken by
+    the algorithm are printed to the screen.
+  }  
+}
+\value{
+  Matrix.
+}
+\details{
+  For details see Section 9.6 of Percival and Walden (2000) or Section
+  7.3 in Gencay, Selcuk and Whitcher (2001).
+}
+\references{
+  Gencay, R., F. Selcuk and B. Whitcher (2001)
+  \emph{An Introduction to Wavelets and Other Filtering Methods in
+    Finance and Economics},
+  Academic Press.
+  
+  Percival, D. B. and A. T. Walden (2000)
+  \emph{Wavelet Methods for Time Series Analysis},
+  Cambridge University Press.
+}
+\seealso{
+  \code{\link{rotcumvar}}, \code{\link{testing.hov}}.
+}
+%\examples{}
+\author{B. Whitcher}
+\keyword{ts}

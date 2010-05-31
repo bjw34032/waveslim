@@ -1,0 +1,20 @@
+\name{xbox}
+\alias{xbox}
+\title{Image with Box and X}
+\description{
+  \deqn{xbox(i,j) = I_{[i=n/4,\;3n/4,\;j;~ n/4 \leq j \leq 3n/4]} +
+    I_{[n/4 \leq i \leq 3n/4;~ j=n/4,\;3n/4,\;i]}}{%
+    xbox(i,j) = I_[i = n/4, 3n/4, j; n/4 \leq j \leq 3n/4] +
+    I_[n/4 \leq i \leq 3n/4; j = n/4, 3n/4, i]}
+}
+\usage{data(xbox)
+}
+\format{A 128 \eqn{\times}{x} 128 matrix.
+}
+\source{S+WAVELETS.
+}
+\references{
+  Bruce, A., and H.-Y. Gao (1996)
+  \emph{Applied Wavelet Analysis with S-PLUS}, Springer: New York.
+}
+\keyword{datasets}

@@ -1,0 +1,33 @@
+\name{plot.dwt.2d}
+\alias{plot.dwt.2d}
+\title{Plot Two-dimensional Discrete Wavelet Transform}
+\description{
+  Organizes the wavelet coefficients from a 2D DWT into a single matrix
+  and plots it.  The coarser resolutions are nested within the
+  lower-lefthand corner of the image.
+}
+\usage{\method{plot}{dwt.2d}(x, cex.axis = 1, plot = TRUE, ...)
+}
+\arguments{
+  \item{x}{input matrix (image)}
+  \item{cex.axis}{\code{par} plotting parameter that controls the size
+    of the axis text}
+  \item{plot}{if \code{plot = FALSE} then the matrix of wavelet
+    coefficients is returned, the default is \code{plot = TRUE}}
+  \item{...}{additional graphical parameters if necessary}
+}
+\value{
+  Image plot.
+}
+\details{
+  The wavelet coefficients from the DWT object (a list) are reorganized
+  into a single matrix of the same dimension as the original image and
+  the result is plotted.
+}
+%\references{}
+\seealso{
+  \code{\link{dwt.2d}}.
+}
+%\examples{}
+\author{B. Whitcher}
+\keyword{ts}

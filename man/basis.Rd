@@ -1,0 +1,38 @@
+\name{basis}
+\alias{basis}
+\title{Produce Boolean Vector from Wavelet Basis Names}
+\description{
+  Produce a vector of zeros and ones from a vector of basis names.
+}
+\usage{basis(x, basis.names)
+}
+\arguments{
+  \item{x}{}
+  \item{basis.names}{}
+}
+\value{
+  Vector of zeros and ones.
+}
+\details{
+  None.
+}
+%\references{}
+\seealso{
+  \code{\link{dwpt}}.
+}
+\examples{
+data(acvs.andel8)
+x <- hosking.sim(1024, acvs.andel8[,2])
+x.dwpt <- dwpt(x, "la8", 7)
+## Select orthonormal basis from wavelet packet tree
+x.basis <- basis(x.dwpt, c("w1.1","w2.1","w3.0","w4.3","w5.4","w6.10",
+                           "w7.22","w7.23"))
+for(i in 1:length(x.dwpt))
+  x.dwpt[[i]] <- x.basis[i] * x.dwpt[[i]]
+## Resonstruct original series using selected orthonormal basis
+y <- idwpt(x.dwpt, x.basis)
+par(mfrow=c(2,1), mar=c(5-1,4,4-1,2))
+plot.ts(x, xlab="", ylab="", main="Original Series")
+plot.ts(y, xlab="", ylab="", main="Reconstructed Series")
+}
+\keyword{ts}
