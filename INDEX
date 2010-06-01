@@ -11,7 +11,8 @@ brick.wall              Replace Boundary Wavelet Coefficients with
 convolve2D              Fast Column-wise Convolution of a Matrix
 cpgram.test             Testing the Wavelet Packet Tree for White Noise
 cpi                     U.S. Consumer Price Index
-cshift                  Miscellaneous Functions for Dual-tree Wavelet
+cplxdual2D              Dual-tree Complex 2D Discrete Wavelet Transform
+cshift                  Miscellaneous Functions for Dual-Tree Wavelet
                         Software
 dau                     Digital Photograph of Ingrid Daubechies
 denoise.dwt.2d          Denoise an Image via the 2D Discrete Wavelet
@@ -58,8 +59,8 @@ modwt                   (Inverse) Maximal Overlap Discrete Wavelet
                         Transform
 modwt.2d                Two-Dimensional Maximal Overlap Discrete
                         Wavelet Transform
-modwt.3d                Three Dimensional Separable Discrete Wavelet
-                        Transform
+modwt.3d                Three Dimensional Separable Maximal Ovelrap
+                        Discrete Wavelet Transform
 mra                     Multiresolution Analysis of Time Series
 mra.2d                  Multiresolution Analysis of an Image
 mra.3d                  Three Dimensional Multiresolution Analysis
