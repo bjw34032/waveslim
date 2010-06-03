@@ -14,14 +14,15 @@ pm(a, b)
 \arguments{
   \item{x}{\eqn{N}-point vector}
   \item{m}{amount of shift}
-  \item{a,b}{}
+  \item{a,b}{input parameters}
 }
 \value{
   \item{y}{vector \eqn{x} will be shifed by \eqn{m} samples to the left
     or matrix \eqn{x} will be shifed by \eqn{m} samples down.}
+  \item{u}{\eqn{(a + b)/sqrt(2)}}
+  \item{v}{\eqn{(a - b)/sqrt(2)}}
 }
-\details{
-}
+%\details{}
 \references{
   WAVELET SOFTWARE AT POLYTECHNIC UNIVERSITY, BROOKLYN, NY\cr
   \url{http://taco.poly.edu/WaveletSoftware/}

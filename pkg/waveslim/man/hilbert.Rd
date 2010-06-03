@@ -27,14 +27,10 @@ modwpt.hilbert(x, wf, n.levels=4, boundary="periodic")
   \item{boundary}{Boundary treatment, currently only \code{periodic} and
     \code{reflection}.}
   \item{y}{Hilbert wavelet transform object (list).}
-  \item{...}{}
+  \item{\ldots}{Additional parametes to be passed on.}
 }
-\value{
-  
-}
-\details{
-
-}
+%\value{}
+%\details{}
 \references{
   Selesnick, I. (200X). \emph{IEEE Signal Processing Magazine}
 

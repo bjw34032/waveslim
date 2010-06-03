@@ -7,8 +7,9 @@
 \usage{basis(x, basis.names)
 }
 \arguments{
-  \item{x}{}
-  \item{basis.names}{}
+  \item{x}{Output from the discrete wavelet package transfrom (DWPT).}
+  \item{basis.names}{Vector of character strings that describe leaves on
+    the DWPT basis tree.  See the examples below for appropriate syntax.}
 }
 \value{
   Vector of zeros and ones.

@@ -26,7 +26,7 @@ modwpt(x, wf = "la8", n.levels = 4, boundary = "periodic")
   }
   \item{n.levels}{
     Specifies the depth of the decomposition.  This must be a number
-    less than or equal to \eqn{\log(\mbox{length}(x),2)}.
+    less than or equal to \eqn{\log(\mbox{length}(x),2)}{log2[length(x)]}.
   }
   \item{boundary}{
     Character string specifying the boundary condition.   If
@@ -35,8 +35,9 @@ modwpt(x, wf = "la8", n.levels = 4, boundary = "periodic")
     if \code{boundary=="reflection"}, the vector beyond its boundaries
     is assumed to be a symmetric reflection of itself.
   }
-  \item{y}{}
-  \item{y.basis}{}
+  \item{y}{Object of S3 class \code{dwpt}.}
+  \item{y.basis}{Vector of character strings that describe leaves on
+    the DWPT basis tree.}
 }
 \value{
   Basically, a list with the following components
