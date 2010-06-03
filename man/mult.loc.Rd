@@ -9,8 +9,12 @@
 \usage{mult.loc(dwt.list, modwt.list, wf, level, min.coef, debug)
 }
 \arguments{
-  \item{dwt.list}{}
-  \item{modwt.list}{}
+  \item{dwt.list}{
+    List of wavelet vector coefficients from the \code{dwt}.
+  }
+  \item{modwt.list}{
+    List of wavelet vector coefficients from the \code{modwt}.
+  }
   \item{wf}{
     Name of the wavelet filter to use in the decomposition.
   }

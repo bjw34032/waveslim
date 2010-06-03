@@ -818,3 +818,4 @@ void three_D_imodwt(double *LLL, double *HLL, double *LHL, double *LLH,
   free(Xl);
   free(Xh);
 }
+
