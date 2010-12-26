@@ -42,7 +42,7 @@ bandpass.var.spp(delta, fG, J, Basis, Length)
   \emph{Journal for Computational and Graphical Statistics}, \bold{10},
   No. 1, 112-134.
 }
-\seealso{}
+%\seealso{}
 %\examples{}
-\author{B. Whitcher}
+\author{Brandon Whitcher}
 \keyword{ts}

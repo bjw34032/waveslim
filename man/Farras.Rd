@@ -15,15 +15,14 @@ FSfarras()
   None.
 }
 \value{
-  \item{af}{List ($i = 1,2$) - analysis filters for tree $i$}
-  \item{sf}{List ($i = 1,2$) - synthesis filters for tree $i$}
+  \item{af}{List (\eqn{i=1,2}) - analysis filters for tree \eqn{i}}
+  \item{sf}{List (\eqn{i=1,2}) - synthesis filters for tree \eqn{i}}
 }
-\details{
-}
+%\details{}
 \references{
-  A. F. Abdelnour and I. W. Selesnick. "Nearly symmetric orthogonal
-  wavelet bases", Proc. IEEE Int. Conf. Acoust., Speech, Signal
-  Processing (ICASSP), May 2001.
+  A. F. Abdelnour and I. W. Selesnick. \dQuote{Nearly symmetric
+    orthogonal wavelet bases}, Proc. IEEE Int. Conf. Acoust., Speech,
+  Signal Processing (ICASSP), May 2001.
 
   WAVELET SOFTWARE AT POLYTECHNIC UNIVERSITY, BROOKLYN, NY\cr
   \url{http://taco.poly.edu/WaveletSoftware/}
@@ -32,5 +31,5 @@ FSfarras()
   \code{\link{afb}}, \code{\link{dualtree}}, \code{\link{dualfilt1}}.
 }
 %\examples{}
-\author{Matlab: S. Cai, K. Li and I. Selesnick; R port: B. Whitcher}
+\author{Matlab: S. Cai, K. Li and I. Selesnick; R port: Brandon Whitcher}
 \keyword{ts}
