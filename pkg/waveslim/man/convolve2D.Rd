@@ -13,18 +13,16 @@ convolve2D(x, y, conj = TRUE, type = c("circular", "open"))
   \item{y}{numeric sequence of length \eqn{N}.}
   \item{conj}{logical; if \code{TRUE}, take the complex \emph{conjugate}
      before back-transforming (default, and used for usual convolution).}
-  \item{type}{character; one of \code{"circular"}, \code{"open"}
+  \item{type}{character; one of \code{circular}, \code{open}
      (beginning of word is ok).  For \code{circular}, the two sequences
      are treated as \emph{circular}, i.e., periodic.
 
-     For \code{open} and \code{filter}, the sequences are padded with '0's
-     (from left and right) first; \code{"filter"} returns the middle
-     sub-vector of \code{"open"}, namely, the result of running a
+     For \code{open} and \code{filter}, the sequences are padded with
+     zeros (from left and right) first; \code{filter} returns the middle 
+     sub-vector of \code{open}, namely, the result of running a
      weighted mean of \code{x} with weights \code{y}.}
 }
-\value{
-  
-}
+%\value{}
 \details{
   This is a corrupted version of \code{convolve} made by replacing
   \code{fft} with \code{mvfft} in a few places.  It would be nice to
@@ -35,5 +33,5 @@ convolve2D(x, y, conj = TRUE, type = c("circular", "open"))
   \code{\link{convolve}}
 }
 %\examples{}
-\author{B. Whitcher}
+\author{Brandon Whitcher}
 \keyword{ts}

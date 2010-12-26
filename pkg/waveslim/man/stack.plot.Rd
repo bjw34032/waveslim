@@ -20,14 +20,12 @@
     plotted.  If not specified, all panels will have unique axes.}
   \item{plot.type,panel,log,col,bg,pch,cex,lty,lwd,ann,xlab,main,oma,...}{See \code{plot.ts}.}
 }
-\value{
-}
+%\value{}
 \details{
   Produces a set of plots, one for each element (column) of \code{x}.
 }
-\references{
-  
-}
-\seealso{}
+%\references{}
+%\seealso{}
+\author{Brandon Whitcher}
 %\examples{}
 \keyword{hplot}

@@ -24,8 +24,7 @@ sfd.sdf(freq, s, d, sigma2 = 1)
 \value{
   The power spectrum from an FD, SP or SFD process.
 }
-\details{
-}
+%\details{}
 %\references{}
 \seealso{
   \code{\link{fdp.mle}}, \code{\link{spp.mle}}.
@@ -48,5 +47,5 @@ plot(freq, dB(spp.sdf(freq, .4, 1/12)), type="l", xlab="frequency",
 plot(freq, dB(sfd.sdf(freq, 12, .4)), type="l", xlab="frequency",
      ylab="spectrum (dB)", main=sfd.main)
 }
-\author{B. Whitcher}
+\author{Brandon Whitcher}
 \keyword{ts}
