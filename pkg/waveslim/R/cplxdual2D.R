@@ -33,15 +33,15 @@ cplxdual2D <- function(x, J, Faf, af) {
   x <- x/2
   w <- vector("list", J+1)
   
-  for(m in 1:2) {
+  for (m in 1:2) {
     w[[1]][[m]] <- vector("list", 2)
-    for(n in 1:2) {
+    for (n in 1:2) {
       w[[1]][[m]][[n]] <- vector("list", 2)
       temp <- afb2D(x, Faf[[m]], Faf[[n]])
       lo <- temp$lo
       w[[1]][[m]][[n]] <- temp$hi
-      if(J > 1) {
-        for(j in 2:J) {
+      if (J > 1) {
+        for (j in 2:J) {
           temp <- afb2D(lo, af[[m]], af[[n]])
           lo <- temp$lo
           w[[j]][[m]][[n]] <- temp$hi
@@ -51,15 +51,15 @@ cplxdual2D <- function(x, J, Faf, af) {
     }
   }
 
-  for(j in 1:J) {
-    for(m in 1:3) {
+  for (j in 1:J) {
+    for (m in 1:3) {
       w[[j]][[1]][[1]][[m]] <- pm(w[[j]][[1]][[1]][[m]])
       w[[j]][[2]][[2]][[m]] <- pm(w[[j]][[2]][[2]][[m]])
       w[[j]][[1]][[2]][[m]] <- pm(w[[j]][[1]][[2]][[m]])
       w[[j]][[2]][[1]][[m]] <- pm(w[[j]][[2]][[1]][[m]])
     }
   }
-  w
+  return(w)
 }
 
 icplxdual2D <- function(w, J, Fsf, sf) {
@@ -80,8 +80,8 @@ icplxdual2D <- function(w, J, Fsf, sf) {
   ## WAVELET SOFTWARE AT POLYTECHNIC UNIVERSITY, BROOKLYN, NY
   ## http://taco.poly.edu/WaveletSoftware/
 
-  for(j in 1:J) {
-    for(m in 1:3) {
+  for (j in 1:J) {
+    for (m in 1:3) {
       w[[j]][[1]][[1]][[m]] <- pm(w[[j]][[1]][[1]][[m]])
       w[[j]][[2]][[2]][[m]] <- pm(w[[j]][[2]][[2]][[m]])
       w[[j]][[1]][[2]][[m]] <- pm(w[[j]][[1]][[2]][[m]])
@@ -90,11 +90,11 @@ icplxdual2D <- function(w, J, Fsf, sf) {
   }
 
   y <- zeros(size(w[[1]][[1]][[1]][[1]])*2)
-  for(m in 1:2) {
-    for(n in 1:2) {
+  for (m in 1:2) {
+    for (n in 1:2) {
       lo <- w[[J+1]][[m]][[n]]
-      if(J > 1) {
-        for(j in J:2) {
+      if (J > 1) {
+        for (j in J:2) {
           lo <- sfb2D(lo, w[[j]][[m]][[n]], sf[[m]], sf[[n]])
         }
         lo <- sfb2D(lo, w[[1]][[m]][[n]], Fsf[[m]], Fsf[[n]])
@@ -104,7 +104,6 @@ icplxdual2D <- function(w, J, Fsf, sf) {
   }
 
   ## normalization
-  y <- y/2
-  y
+  return(y/2)
 }
 

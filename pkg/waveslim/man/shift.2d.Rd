@@ -5,16 +5,16 @@
   Compute phase shifts for wavelet sub-matrices based on the ``center of
   energy'' argument of Hess-Nielsen and Wickerhauser (1996).
 }
-\usage{shift.2d(z, wf, inv=FALSE)
+\usage{shift.2d(z, inverse=FALSE)
 }
 \arguments{
-  \item{z}{2D MODWT object}
-  \item{wf}{Character string for wavelet filter.}
-  \item{inv}{Boolean value on whether to perform the forward or inverse
+  \item{z}{Two-dimensional MODWT object}
+%  \item{wf}{Character string for wavelet filter.}
+  \item{inverse}{Boolean value on whether to perform the forward or inverse
     operation.}
 }
 \value{
-  2D MODWT object with circularly shifted coefficients.
+  Two-dimensional MODWT object with circularly shifted coefficients.
 }
 \details{
   The "center of energy" technique of Wickerhauser and Hess-Nielsen
@@ -36,19 +36,20 @@
   \code{\link{phase.shift}}, \code{\link{modwt.2d}}.
 }
 \examples{
-G1 <- G2 <- dnorm(seq(-512/4,512/4,length=512))
-G <- 100 * zapsmall(G1 \%o\% G2)
-J <- 6
-G <- modwt.2d(G, "la8", J)
-names.modwt <- c(t(sapply(c("LH","HL","HH"), paste, 1:J, sep="")), 
-                 paste("LL", J, sep=""))
-n <- 50
-par(mfrow=c(3,3), mar=c(5,4,4,2)/1.9, pty="s")
-for(i in names.modwt[1:9])
-  image(G[[i]][256 + -n:n, 256 + -n:n], axes=FALSE, col=rainbow(128), main=i)
-Gs <- shift.2d(G, "la8")
-for(i in names.modwt[1:9])
-  image(Gs[[i]][256 + -n:n, 256 + -n:n], axes=FALSE, col=rainbow(128), main=i)
+n <- 512
+G1 <- G2 <- dnorm(seq(-n/4, n/4, length=n))
+G <- 100 * zapsmall(outer(G1, G2))
+G <- modwt.2d(G, wf="la8", J=6)
+k <- 50
+xr <- yr <- trunc(n/2) + (-k:k)
+par(mfrow=c(3,3), mar=c(1,1,2,1), pty="s")
+for (j in names(G)[1:9]) {
+  image(G[[j]][xr,yr], col=rainbow(64), axes=FALSE, main=j)
 }
-\author{B. Whitcher}
+Gs <- shift.2d(G)
+for (j in names(G)[1:9]) {
+  image(Gs[[j]][xr,yr], col=rainbow(64), axes=FALSE, main=j)
+}
+}
+\author{Brandon Whitcher}
 \keyword{ts}
