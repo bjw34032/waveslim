@@ -1,5 +1,6 @@
 \name{dualfilt1}
 \alias{dualfilt1}
+\alias{AntonB}
 \title{Kingsbury's Q-filters for the Dual-Tree Complex DWT}
 \description{
   Kingsbury's Q-filters for the dual-tree complex DWT.

@@ -89,7 +89,7 @@ icplxdual2D <- function(w, J, Fsf, sf) {
     }
   }
 
-  y <- zeros(size(w[[1]][[1]][[1]][[1]])*2)
+  y <- matrix(0, 2*nrow(w[[1]][[1]][[1]][[1]]), 2*ncol(w[[1]][[1]][[1]][[1]]))
   for (m in 1:2) {
     for (n in 1:2) {
       lo <- w[[J+1]][[m]][[n]]
