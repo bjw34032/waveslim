@@ -6,6 +6,8 @@
 \alias{sure.thresh}
 \alias{universal.thresh}
 \alias{universal.thresh.modwt}
+\alias{bishrink}
+\alias{soft}
 \title{Wavelet Shrinkage via Thresholding}
 \description{
   Perform wavelet shrinkage using data-analytic, hybrid SURE, manual,
