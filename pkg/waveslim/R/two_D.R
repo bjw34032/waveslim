@@ -203,8 +203,8 @@ plot.dwt.2d <- function(x, cex.axis=1, plot=TRUE, ...)
     }
     at <- c((3*N+2)/2^(1:J+1),(N+2)/2^(J+1))
     labs <- c(paste("H",1:J,sep=""), paste("L",J,sep=""))
-    axis(side=1, at=at, label=labs, tick=FALSE, cex.axis=cex.axis)
-    axis(side=2, at=at, label=labs, tick=FALSE, cex.axis=cex.axis)
+    axis(side=1, at=at, labels=labs, tick=FALSE, cex.axis=cex.axis)
+    axis(side=2, at=at, labels=labs, tick=FALSE, cex.axis=cex.axis)
   }
   else
     return(X)

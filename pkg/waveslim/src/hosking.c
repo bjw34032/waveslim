@@ -8,7 +8,6 @@ void hosking(double *Xt, int *N, double *vin)
   int nrow=nrh-nrl+1,ncol=nch-ncl+1;
   double *vt, *mt, *Nt, *Dt, *rhot;
   double **phi; /* = dmatrix(1, *N-1, 1, *N-1); */
-  double PI = 3.141592653589793;
 
 
   vt = (double *) malloc((size_t) ((*N + 2) * sizeof(double)));
