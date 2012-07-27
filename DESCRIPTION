@@ -1,10 +1,10 @@
 Package: waveslim
-Version: 1.7.0
-Date: 2012-03-12
+Version: 1.7.2
+Date: 2012-07-27
 Title: Basic wavelet routines for one-, two- and three-dimensional signal 
   processing
 Author: Brandon Whitcher
-Maintainer: Brandon Whitcher <bjw34032@users.sourceforge.net>
+Maintainer: Brandon Whitcher <bwhitcher@gmail.com>
 Depends: R (>= 2.10.0), graphics, grDevices, stats
 Suggests: fftw
 Description: Basic wavelet routines for time series (1D), image (2D) 

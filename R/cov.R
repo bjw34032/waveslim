@@ -85,7 +85,7 @@ wave.covariance <- function(x, y) {
     u <- c(u, rep(0, n))
     v <- c(v, rep(0, n))
     n <- length(u)
-    x <- Re(fft(fft(u) * Conj(fft(v)), inv = TRUE)) / 2 / n^2
+    x <- Re(fft(fft(u) * Conj(fft(v)), inverse=TRUE)) / 2 / n^2
     x[c((n %/% 2):n, 1:(n %/% 2 - 1))]
   }
   compute.sum.xy.ccvs <- function(x, y) {
