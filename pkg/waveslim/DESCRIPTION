@@ -1,11 +1,11 @@
 Package: waveslim
-Version: 1.7.3
-Date: 2013-11-02
+Version: 1.7.4
+Date: 2013-12-26
 Title: Basic wavelet routines for one-, two- and three-dimensional signal 
   processing
 Author: Brandon Whitcher
 Maintainer: Brandon Whitcher <bwhitcher@gmail.com>
-Depends: R (>= 2.10.0), graphics, grDevices, stats
+Depends: R (>= 2.10.0), graphics, grDevices, stats, utils
 Suggests: fftw
 Description: Basic wavelet routines for time series (1D), image (2D) 
   and array (3D) analysis.  The code provided here is based on
@@ -15,5 +15,5 @@ Description: Basic wavelet routines for time series (1D), image (2D)
   Selesnick; and Hilbert wavelet pairs (Selesnick 2001, 2002).  All
   figures in chapters 4-7 of GSW (2001) are reproducible using this 
   package and R code available at the book website(s) below.
-License: GPL (>= 2)
+License: BSD_3_clause + file LICENSE
 URL: http://waveslim.blogspot.com, http://www2.imperial.ac.uk/~bwhitche/book
