@@ -1,0 +1,1121 @@
+
+R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin10.8.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "waveslim"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('waveslim')
+
+waveslim: Wavelet Method for 1/2/3D Signals (version = 1.7.4)
+
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("Dualtree")
+> ### * Dualtree
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Dualtree
+> ### Title: Dual-tree Complex Discrete Wavelet Transform
+> ### Aliases: dualtree idualtree dualtree2D idualtree2D
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> ## EXAMPLE: dualtree
+> x = rnorm(512)
+> J = 4
+> Faf = FSfarras()$af
+> Fsf = FSfarras()$sf
+> af = dualfilt1()$af
+> sf = dualfilt1()$sf
+> w = dualtree(x, J, Faf, af)
+> y = idualtree(w, J, Fsf, sf)
+> err = x - y
+> max(abs(err))
+[1] 1.688595e-08
+> 
+> ## Example: dualtree2D
+> x = matrix(rnorm(64*64), 64, 64)
+> J = 3
+> Faf = FSfarras()$af
+> Fsf = FSfarras()$sf
+> af = dualfilt1()$af
+> sf = dualfilt1()$sf
+> w = dualtree2D(x, J, Faf, af)
+> y = idualtree2D(w, J, Fsf, sf)
+> err = x - y
+> max(abs(err))
+[1] 2.385238e-08
+> 
+> ## Display 2D wavelets of dualtree2D.m
+> 
+> J <- 4
+> L <- 3 * 2^(J+1)
+> N <- L / 2^J
+> Faf <- FSfarras()$af
+> Fsf <- FSfarras()$sf
+> af <- dualfilt1()$af
+> sf <- dualfilt1()$sf
+> x <- matrix(0, 2*L, 3*L)
+> w <- dualtree2D(x, J, Faf, af)
+> w[[J]][[1]][[1]][N/2, N/2+0*N] <- 1
+> w[[J]][[1]][[2]][N/2, N/2+1*N] <- 1
+> w[[J]][[1]][[3]][N/2, N/2+2*N] <- 1
+> w[[J]][[2]][[1]][N/2+N, N/2+0*N] <- 1
+> w[[J]][[2]][[2]][N/2+N, N/2+1*N] <- 1
+> w[[J]][[2]][[3]][N/2+N, N/2+2*N] <- 1
+> y <- idualtree2D(w, J, Fsf, sf)
+> image(t(y), col=grey(0:64/64), axes=FALSE)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("basis")
+> ### * basis
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: basis
+> ### Title: Produce Boolean Vector from Wavelet Basis Names
+> ### Aliases: basis
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> data(acvs.andel8)
+> x <- hosking.sim(1024, acvs.andel8[,2])
+> x.dwpt <- dwpt(x, "la8", 7)
+> ## Select orthonormal basis from wavelet packet tree
+> x.basis <- basis(x.dwpt, c("w1.1","w2.1","w3.0","w4.3","w5.4","w6.10",
++                            "w7.22","w7.23"))
+> for(i in 1:length(x.dwpt))
++   x.dwpt[[i]] <- x.basis[i] * x.dwpt[[i]]
+> ## Resonstruct original series using selected orthonormal basis
+> y <- idwpt(x.dwpt, x.basis)
+> par(mfrow=c(2,1), mar=c(5-1,4,4-1,2))
+> plot.ts(x, xlab="", ylab="", main="Original Series")
+> plot.ts(y, xlab="", ylab="", main="Reconstructed Series")
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("cplxdual")
+> ### * cplxdual
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Dualtree Complex
+> ### Title: Dual-tree Complex 2D Discrete Wavelet Transform
+> ### Aliases: cplxdual2D icplxdual2D
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D ## EXAMPLE: cplxdual2D
+> ##D x = matrix(rnorm(32*32), 32, 32)
+> ##D J = 5
+> ##D Faf = FSfarras()$af
+> ##D Fsf = FSfarras()$sf
+> ##D af = dualfilt1()$af
+> ##D sf = dualfilt1()$sf
+> ##D w = cplxdual2D(x, J, Faf, af)
+> ##D y = icplxdual2D(w, J, Fsf, sf)
+> ##D err = x - y
+> ##D max(abs(err))
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("denoise.dwt.2d")
+> ### * denoise.dwt.2d
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: denoise.2d
+> ### Title: Denoise an Image via the 2D Discrete Wavelet Transform
+> ### Aliases: denoise.dwt.2d denoise.modwt.2d
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> ## Xbox image
+> data(xbox)
+> n <- NROW(xbox)
+> xbox.noise <- xbox + matrix(rnorm(n*n, sd=.15), n, n)
+> par(mfrow=c(2,2), cex=.8, pty="s")
+> image(xbox.noise, col=rainbow(128), main="Original Image")
+> image(denoise.dwt.2d(xbox.noise, wf="haar"), col=rainbow(128),
++       zlim=range(xbox.noise), main="Denoised image")
+> image(xbox.noise - denoise.dwt.2d(xbox.noise, wf="haar"), col=rainbow(128),
++       zlim=range(xbox.noise), main="Residual image")
+> 
+> ## Daubechies image
+> data(dau)
+> n <- NROW(dau)
+> dau.noise <- dau + matrix(rnorm(n*n, sd=10), n, n)
+> par(mfrow=c(2,2), cex=.8, pty="s")
+> image(dau.noise, col=rainbow(128), main="Original Image")
+> dau.denoise <- denoise.modwt.2d(dau.noise, wf="d4", rule="soft")
+> image(dau.denoise, col=rainbow(128), zlim=range(dau.noise),
++       main="Denoised image")
+> image(dau.noise - dau.denoise, col=rainbow(128), main="Residual image")
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("dwpt")
+> ### * dwpt
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dwpt
+> ### Title: (Inverse) Discrete Wavelet Packet Transforms
+> ### Aliases: dwpt idwpt modwpt
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> data(mexm)
+> J <- 4
+> mexm.mra <- mra(log(mexm), "mb8", J, "modwt", "reflection")
+> mexm.nomean <- ts(
++   apply(matrix(unlist(mexm.mra), ncol=J+1, byrow=FALSE)[,-(J+1)], 1, sum), 
++   start=1957, freq=12)
+> mexm.dwpt <- dwpt(mexm.nomean[-c(1:4)], "mb8", 7, "reflection")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("dwpt.sim")
+> ### * dwpt.sim
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dwpt.sim
+> ### Title: Simulate Seasonal Persistent Processes Using the DWPT
+> ### Aliases: dwpt.sim
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> ## Generate monthly time series with annual oscillation
+> ## library(ts) is required in order to access acf()
+> x <- dwpt.sim(256, "mb16", .4, 1/12, M=4, epsilon=.001)
+> par(mfrow=c(2,1))
+> plot(x, type="l", xlab="Time")
+> acf(x, lag.max=128, ylim=c(-.6,1))
+> data(acvs.andel8)
+> lines(acvs.andel8$lag[1:128], acvs.andel8$acf[1:128], col=2)
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("dwt.2d")
+> ### * dwt.2d
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dwt.2d
+> ### Title: Two-Dimensional Discrete Wavelet Transform
+> ### Aliases: dwt.2d idwt.2d
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> ## Xbox image
+> data(xbox)
+> xbox.dwt <- dwt.2d(xbox, "haar", 3)
+> par(mfrow=c(1,1), pty="s")
+> plot.dwt.2d(xbox.dwt)
+> par(mfrow=c(2,2), pty="s")
+> image(1:dim(xbox)[1], 1:dim(xbox)[2], xbox, xlab="", ylab="",
++       main="Original Image")
+> image(1:dim(xbox)[1], 1:dim(xbox)[2], idwt.2d(xbox.dwt), xlab="", ylab="",
++       main="Wavelet Reconstruction")
+> image(1:dim(xbox)[1], 1:dim(xbox)[2], xbox - idwt.2d(xbox.dwt),
++       xlab="", ylab="", main="Difference")
+> 
+> ## Daubechies image
+> data(dau)
+> par(mfrow=c(1,1), pty="s")
+> image(dau, col=rainbow(128))
+> sum(dau^2)
+[1] 1049732962
+> dau.dwt <- dwt.2d(dau, "d4", 3)
+> plot.dwt.2d(dau.dwt)
+> sum(plot.dwt.2d(dau.dwt, plot=FALSE)^2)
+[1] 1049732962
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("dwt")
+> ### * dwt
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dwt
+> ### Title: Discrete Wavelet Transform (DWT)
+> ### Aliases: dwt dwt.nondyadic idwt
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> ## Figures 4.17 and 4.18 in Gencay, Selcuk and Whitcher (2001).
+> data(ibm)     
+> ibm.returns <- diff(log(ibm))
+> ## Haar
+> ibmr.haar <- dwt(ibm.returns, "haar")
+> names(ibmr.haar) <- c("w1", "w2", "w3", "w4", "v4")
+> ## plot partial Haar DWT for IBM data
+> par(mfcol=c(6,1), pty="m", mar=c(5-2,4,4-2,2))
+> plot.ts(ibm.returns, axes=FALSE, ylab="", main="(a)")
+> for(i in 1:4)
++   plot.ts(up.sample(ibmr.haar[[i]], 2^i), type="h", axes=FALSE,
++           ylab=names(ibmr.haar)[i])
+> plot.ts(up.sample(ibmr.haar$v4, 2^4), type="h", axes=FALSE,
++         ylab=names(ibmr.haar)[5])
+> axis(side=1, at=seq(0,368,by=23), 
++      labels=c(0,"",46,"",92,"",138,"",184,"",230,"",276,"",322,"",368))
+> ## LA(8)
+> ibmr.la8 <- dwt(ibm.returns, "la8")
+> names(ibmr.la8) <- c("w1", "w2", "w3", "w4", "v4")
+> ## must shift LA(8) coefficients
+> ibmr.la8$w1 <- c(ibmr.la8$w1[-c(1:2)], ibmr.la8$w1[1:2])
+> ibmr.la8$w2 <- c(ibmr.la8$w2[-c(1:2)], ibmr.la8$w2[1:2])
+> for(i in names(ibmr.la8)[3:4])
++   ibmr.la8[[i]] <- c(ibmr.la8[[i]][-c(1:3)], ibmr.la8[[i]][1:3])
+> ibmr.la8$v4 <- c(ibmr.la8$v4[-c(1:2)], ibmr.la8$v4[1:2])
+> ## plot partial LA(8) DWT for IBM data
+> par(mfcol=c(6,1), pty="m", mar=c(5-2,4,4-2,2))
+> plot.ts(ibm.returns, axes=FALSE, ylab="", main="(b)")
+> for(i in 1:4)
++   plot.ts(up.sample(ibmr.la8[[i]], 2^i), type="h", axes=FALSE,
++           ylab=names(ibmr.la8)[i])
+> plot.ts(up.sample(ibmr.la8$v4, 2^4), type="h", axes=FALSE,
++         ylab=names(ibmr.la8)[5])
+> axis(side=1, at=seq(0,368,by=23), 
++   labels=c(0,"",46,"",92,"",138,"",184,"",230,"",276,"",322,"",368))
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("fb")
+> ### * fb
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Dual-tree Filter Banks
+> ### Title: Filter Banks for Dual-Tree Wavelet Transforms
+> ### Aliases: afb afb2D afb2D.A sfb sfb2D sfb2D.A
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> ## EXAMPLE: afb, sfb
+> af = farras()$af
+> sf = farras()$sf
+> x = rnorm(64)
+> x.afb = afb(x, af)
+> lo = x.afb$lo
+> hi = x.afb$hi
+> y = sfb(lo, hi, sf)
+> err = x - y
+> max(abs(err))
+[1] 2.337019e-14
+> 
+> ## EXAMPLE: afb2D, sfb2D
+> x = matrix(rnorm(32*64), 32, 64)
+> af = farras()$af
+> sf = farras()$sf
+> x.afb2D = afb2D(x, af, af)
+> lo = x.afb2D$lo
+> hi = x.afb2D$hi
+> y = sfb2D(lo, hi, sf, sf)
+> err = x - y
+> max(abs(err))
+[1] 5.839773e-14
+> 
+> ## Example: afb2D.A, sfb2D.A
+> x = matrix(rnorm(32*64), 32, 64)
+> af = farras()$af
+> sf = farras()$sf
+> x.afb2D.A = afb2D.A(x, af, 1)
+> lo = x.afb2D.A$lo
+> hi = x.afb2D.A$hi
+> y = sfb2D.A(lo, hi, sf, 1)
+> err = x - y
+> max(abs(err))
+[1] 4.156397e-14
+> 
+> 
+> 
+> cleanEx()
+> nameEx("fdp.mle")
+> ### * fdp.mle
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fdp.mle
+> ### Title: Wavelet-based Maximum Likelihood Estimation for a Fractional
+> ###   Difference Process
+> ### Aliases: fdp.mle
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> ## Figure 5.5 in Gencay, Selcuk and Whitcher (2001)
+> fdp.sdf <- function(freq, d, sigma2=1)
++   sigma2 / ((2*sin(pi * freq))^2)^d
+> dB <- function(x) 10 * log10(x)
+> per <- function(z) {
++   n <- length(z)
++   (Mod(fft(z))**2/(2*pi*n))[1:(n %/% 2 + 1)]
++ }
+> data(ibm)     
+> ibm.returns <- diff(log(ibm))
+> ibm.volatility <- abs(ibm.returns)
+> ibm.vol.mle <- fdp.mle(ibm.volatility, "d4", 4)
+> freq <- 0:184/368
+> ibm.vol.per <- 2 * pi * per(ibm.volatility)
+> ibm.vol.resid <- ibm.vol.per/ fdp.sdf(freq, ibm.vol.mle$parameters[1])
+> par(mfrow=c(1,1), las=0, pty="m")
+> plot(freq, dB(ibm.vol.per), type="l", xlab="Frequency", ylab="Spectrum")
+> lines(freq, dB(fdp.sdf(freq, ibm.vol.mle$parameters[1],
++                        ibm.vol.mle$parameters[2]/2)), col=2)
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("hilbert.filter")
+> ### * hilbert.filter
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: hilbert.filter
+> ### Title: Select a Hilbert Wavelet Pair
+> ### Aliases: hilbert.filter
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> hilbert.filter("k3l3")
+$length
+[1] 12
+
+$hpf
+$hpf[[1]]
+ [1] -0.0022260892  0.0426791770  0.0248291600 -0.4982782400  0.7997265200
+ [6] -0.2867863600 -0.1564275500  0.0331898960  0.0434276420  0.0022046914
+[11] -0.0022229002 -0.0001159435
+
+$hpf[[2]]
+ [1] -1.558262e-02  4.943225e-02  2.167541e-01 -7.458501e-01  6.133371e-01
+ [6]  1.550640e-02 -1.270504e-01 -3.236969e-02  1.970114e-02  6.190912e-03
+[11] -5.254341e-05 -1.656336e-05
+
+
+$lpf
+$lpf[[1]]
+ [1]  0.0001159435 -0.0022229002 -0.0022046914  0.0434276420 -0.0331898960
+ [6] -0.1564275500  0.2867863600  0.7997265200  0.4982782400  0.0248291600
+[11] -0.0426791770 -0.0022260892
+
+$lpf[[2]]
+ [1]  1.656336e-05 -5.254341e-05 -6.190912e-03  1.970114e-02  3.236969e-02
+ [6] -1.270504e-01 -1.550640e-02  6.133371e-01  7.458501e-01  2.167541e-01
+[11] -4.943225e-02 -1.558262e-02
+
+
+> hilbert.filter("k3l5")
+$length
+[1] 12
+
+$hpf
+$hpf[[1]]
+ [1] -5.854176e-06  2.299268e-04  2.864101e-03 -1.273398e-02 -5.957379e-02
+ [6]  1.300891e-01  2.653746e-01 -7.875716e-01  5.340248e-01 -3.981034e-03
+[11] -4.557677e-02 -3.574788e-02  1.021288e-02  2.614091e-03 -2.131052e-04
+[16] -5.425879e-06
+
+$hpf[[2]]
+ [1] -6.439594e-05 -4.664223e-05  9.547891e-03  6.282690e-03 -1.233684e-01
+ [6]  4.621801e-03  5.832856e-01 -7.650914e-01  2.292948e-01  7.456225e-02
+[11]  9.250975e-03 -2.860147e-02 -8.400312e-04  1.166470e-03  3.572714e-07
+[16] -4.932617e-07
+
+
+$lpf
+$lpf[[1]]
+ [1]  5.425879e-06 -2.131052e-04 -2.614091e-03  1.021288e-02  3.574788e-02
+ [6] -4.557677e-02  3.981034e-03  5.340248e-01  7.875716e-01  2.653746e-01
+[11] -1.300891e-01 -5.957379e-02  1.273398e-02  2.864101e-03 -2.299268e-04
+[16] -5.854176e-06
+
+$lpf[[2]]
+ [1]  4.932617e-07  3.572714e-07 -1.166470e-03 -8.400312e-04  2.860147e-02
+ [6]  9.250975e-03 -7.456225e-02  2.292948e-01  7.650914e-01  5.832856e-01
+[11] -4.621801e-03 -1.233684e-01 -6.282690e-03  9.547891e-03  4.664223e-05
+[16] -6.439594e-05
+
+
+> hilbert.filter("k4l2")
+$length
+[1] 12
+
+$hpf
+$hpf[[1]]
+ [1]  0.002285229 -0.017099408 -0.061694251  0.160409270  0.227520750
+ [6] -0.774586170  0.560358370 -0.041525062 -0.034722190 -0.036090743
+[11]  0.013358873  0.001785330
+
+$hpf[[2]]
+ [1]  0.0114261460  0.0059121296 -0.1332013800  0.0403150080  0.5409737900
+ [6] -0.7795662200  0.2746430800  0.0584667250  0.0134499020 -0.0325914860
+[11] -0.0001847535  0.0003570660
+
+
+$lpf
+$lpf[[1]]
+ [1] -0.001785330  0.013358873  0.036090743 -0.034722190  0.041525062
+ [6]  0.560358370  0.774586170  0.227520750 -0.160409270 -0.061694251
+[11]  0.017099408  0.002285229
+
+$lpf[[2]]
+ [1] -0.0003570660 -0.0001847535  0.0325914860  0.0134499020 -0.0584667250
+ [6]  0.2746430800  0.7795662200  0.5409737900 -0.0403150080 -0.1332013800
+[11] -0.0059121296  0.0114261460
+
+
+> hilbert.filter("k4l4")
+$length
+[1] 16
+
+$hpf
+$hpf[[1]]
+ [1] -2.593319e-05  6.742522e-04  5.732357e-03 -1.697939e-02 -6.975951e-02
+ [6]  1.337267e-01  2.790955e-01 -7.833091e-01  5.302173e-01 -8.136445e-03
+[11] -5.068726e-02 -3.860533e-02  1.320347e-02  5.548244e-03 -6.690907e-04
+[16] -2.573467e-05
+
+$hpf[[2]]
+ [1] -2.333987e-04 -1.556956e-04  1.548964e-02  9.196125e-03 -1.352010e-01
+ [6] -5.170879e-03  5.883470e-01 -7.574938e-01  2.329811e-01  7.708457e-02
+[11]  7.702384e-03 -3.355466e-02 -1.980900e-03  2.990384e-03  1.907454e-06
+[16] -2.859407e-06
+
+
+$lpf
+$lpf[[1]]
+ [1]  2.573467e-05 -6.690907e-04 -5.548244e-03  1.320347e-02  3.860533e-02
+ [6] -5.068726e-02  8.136445e-03  5.302173e-01  7.833091e-01  2.790955e-01
+[11] -1.337267e-01 -6.975951e-02  1.697939e-02  5.732357e-03 -6.742522e-04
+[16] -2.593319e-05
+
+$lpf[[2]]
+ [1]  2.859407e-06  1.907454e-06 -2.990384e-03 -1.980900e-03  3.355466e-02
+ [6]  7.702384e-03 -7.708457e-02  2.329811e-01  7.574938e-01  5.883470e-01
+[11]  5.170879e-03 -1.352010e-01 -9.196125e-03  1.548964e-02  1.556956e-04
+[16] -2.333987e-04
+
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("hosking.sim")
+> ### * hosking.sim
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: hosking.sim
+> ### Title: Generate Stationary Gaussian Process Using Hosking's Method
+> ### Aliases: hosking.sim
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> dB <- function(x) 10 * log10(x)
+> per <- function (z) {
++   n <- length(z)
++   (Mod(fft(z))^2/(2 * pi * n))[1:(n%/%2 + 1)]
++ }
+> spp.sdf <- function(freq, delta, omega)
++   abs(2 * (cos(2*pi*freq) - cos(2*pi*omega)))^(-2*delta)
+> data(acvs.andel8)
+> n <- 1024
+> z <- hosking.sim(n, acvs.andel8[,2])
+> per.z <- 2 * pi * per(z)
+> par(mfrow=c(2,1), las=1)
+> plot.ts(z, ylab="", main="Realization of a Seasonal Long-Memory Process")
+> plot(0:(n/2)/n, dB(per.z), type="l", xlab="Frequency", ylab="dB",
++      main="Periodogram")
+> lines(0:(n/2)/n, dB(spp.sdf(0:(n/2)/n, .4, 1/12)), col=2)
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("modwt.2d")
+> ### * modwt.2d
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: modwt.2d
+> ### Title: Two-Dimensional Maximal Overlap Discrete Wavelet Transform
+> ### Aliases: modwt.2d imodwt.2d
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> ## Xbox image
+> data(xbox)
+> xbox.modwt <- modwt.2d(xbox, "haar", 2)
+> ## Level 1 decomposition
+> par(mfrow=c(2,2), pty="s")
+> image(xbox.modwt$LH1, col=rainbow(128), axes=FALSE, main="LH1")
+> image(xbox.modwt$HH1, col=rainbow(128), axes=FALSE, main="HH1")
+> frame()
+> image(xbox.modwt$HL1, col=rainbow(128), axes=FALSE, main="HL1")
+> ## Level 2 decomposition
+> par(mfrow=c(2,2), pty="s")
+> image(xbox.modwt$LH2, col=rainbow(128), axes=FALSE, main="LH2")
+> image(xbox.modwt$HH2, col=rainbow(128), axes=FALSE, main="HH2")
+> image(xbox.modwt$LL2, col=rainbow(128), axes=FALSE, main="LL2")
+> image(xbox.modwt$HL2, col=rainbow(128), axes=FALSE, main="HL2")
+> sum((xbox - imodwt.2d(xbox.modwt))^2)
+[1] 0
+> 
+> data(dau)
+> par(mfrow=c(1,1), pty="s")
+> image(dau, col=rainbow(128), axes=FALSE, main="Ingrid Daubechies")
+> sum(dau^2)
+[1] 1049732962
+> dau.modwt <- modwt.2d(dau, "d4", 2)
+> ## Level 1 decomposition
+> par(mfrow=c(2,2), pty="s")
+> image(dau.modwt$LH1, col=rainbow(128), axes=FALSE, main="LH1")
+> image(dau.modwt$HH1, col=rainbow(128), axes=FALSE, main="HH1")
+> frame()
+> image(dau.modwt$HL1, col=rainbow(128), axes=FALSE, main="HL1")
+> ## Level 2 decomposition
+> par(mfrow=c(2,2), pty="s")
+> image(dau.modwt$LH2, col=rainbow(128), axes=FALSE, main="LH2")
+> image(dau.modwt$HH2, col=rainbow(128), axes=FALSE, main="HH2")
+> image(dau.modwt$LL2, col=rainbow(128), axes=FALSE, main="LL2")
+> image(dau.modwt$HL2, col=rainbow(128), axes=FALSE, main="HL2")
+> sum((dau - imodwt.2d(dau.modwt))^2)
+[1] 0
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("modwt")
+> ### * modwt
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: modwt
+> ### Title: (Inverse) Maximal Overlap Discrete Wavelet Transform
+> ### Aliases: modwt imodwt
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> ## Figure 4.23 in Gencay, Selcuk and Whitcher (2001)
+> data(ibm)     
+> ibm.returns <- diff(log(ibm))
+> # Haar
+> ibmr.haar <- modwt(ibm.returns, "haar")
+> names(ibmr.haar) <- c("w1", "w2", "w3", "w4", "v4")
+> # LA(8)
+> ibmr.la8 <- modwt(ibm.returns, "la8")
+> names(ibmr.la8) <- c("w1", "w2", "w3", "w4", "v4")
+> # shift the MODWT vectors
+> ibmr.la8 <- phase.shift(ibmr.la8, "la8")
+> ## plot partial MODWT for IBM data
+> par(mfcol=c(6,1), pty="m", mar=c(5-2,4,4-2,2))
+> plot.ts(ibm.returns, axes=FALSE, ylab="", main="(a)")
+> for(i in 1:5)
++   plot.ts(ibmr.haar[[i]], axes=FALSE, ylab=names(ibmr.haar)[i])
+> axis(side=1, at=seq(0,368,by=23), 
++   labels=c(0,"",46,"",92,"",138,"",184,"",230,"",276,"",322,"",368))
+> par(mfcol=c(6,1), pty="m", mar=c(5-2,4,4-2,2))
+> plot.ts(ibm.returns, axes=FALSE, ylab="", main="(b)")
+> for(i in 1:5)
++   plot.ts(ibmr.la8[[i]], axes=FALSE, ylab=names(ibmr.la8)[i])
+> axis(side=1, at=seq(0,368,by=23), 
++   labels=c(0,"",46,"",92,"",138,"",184,"",230,"",276,"",322,"",368))
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("mra.2d")
+> ### * mra.2d
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: mra.2d
+> ### Title: Multiresolution Analysis of an Image
+> ### Aliases: mra.2d
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> ## Easy check to see if it works...
+> ## --------------------------------
+> 
+> x <- matrix(rnorm(32*32), 32, 32)
+> # MODWT
+> x.mra <- mra.2d(x, method="modwt")
+> x.mra.sum <- x.mra[[1]]
+> for(j in 2:length(x.mra))
++   x.mra.sum <- x.mra.sum + x.mra[[j]]
+> sum((x - x.mra.sum)^2)
+[1] 5.409576e-12
+> 
+> # DWT
+> x.mra <- mra.2d(x, method="dwt")
+> x.mra.sum <- x.mra[[1]]
+> for(j in 2:length(x.mra))
++   x.mra.sum <- x.mra.sum + x.mra[[j]]
+> sum((x - x.mra.sum)^2)
+[1] 7.260364e-12
+> 
+> 
+> 
+> cleanEx()
+> nameEx("mra")
+> ### * mra
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: mra
+> ### Title: Multiresolution Analysis of Time Series
+> ### Aliases: mra
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> ## Easy check to see if it works...
+> x <- rnorm(32)
+> x.mra <- mra(x)
+> sum(x - apply(matrix(unlist(x.mra), nrow=32), 1, sum))^2
+[1] 2.242776e-29
+> 
+> ## Figure 4.19 in Gencay, Selcuk and Whitcher (2001)
+> data(ibm)     
+> ibm.returns <- diff(log(ibm))
+> ibm.volatility <- abs(ibm.returns)
+> ## Haar
+> ibmv.haar <- mra(ibm.volatility, "haar", 4, "dwt")
+> names(ibmv.haar) <- c("d1", "d2", "d3", "d4", "s4")
+> ## LA(8)
+> ibmv.la8 <- mra(ibm.volatility, "la8", 4, "dwt")
+> names(ibmv.la8) <- c("d1", "d2", "d3", "d4", "s4")
+> ## plot multiresolution analysis of IBM data
+> par(mfcol=c(6,1), pty="m", mar=c(5-2,4,4-2,2))
+> plot.ts(ibm.volatility, axes=FALSE, ylab="", main="(a)")
+> for(i in 1:5)
++   plot.ts(ibmv.haar[[i]], axes=FALSE, ylab=names(ibmv.haar)[i])
+> axis(side=1, at=seq(0,368,by=23), 
++   labels=c(0,"",46,"",92,"",138,"",184,"",230,"",276,"",322,"",368))
+> par(mfcol=c(6,1), pty="m", mar=c(5-2,4,4-2,2))
+> plot.ts(ibm.volatility, axes=FALSE, ylab="", main="(b)")
+> for(i in 1:5)
++   plot.ts(ibmv.la8[[i]], axes=FALSE, ylab=names(ibmv.la8)[i])
+> axis(side=1, at=seq(0,368,by=23), 
++   labels=c(0,"",46,"",92,"",138,"",184,"",230,"",276,"",322,"",368))
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("my.acf")
+> ### * my.acf
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: my.acf
+> ### Title: Autocovariance Functions via the Discrete Fourier Transform
+> ### Aliases: my.acf my.ccf
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> data(ibm)
+> ibm.returns <- diff(log(ibm))
+> plot(1:length(ibm.returns) - 1, my.acf(ibm.returns), type="h",
++      xlab="lag", ylab="ACVS", main="Autocovariance Sequence for IBM Returns")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ortho.basis")
+> ### * ortho.basis
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ortho.basis
+> ### Title: Derive Orthonormal Basis from Wavelet Packet Tree
+> ### Aliases: ortho.basis
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> data(japan)
+> J <- 4
+> wf <- "mb8"
+> japan.mra <- mra(log(japan), wf, J, boundary="reflection")
+> japan.nomean <-
++   ts(apply(matrix(unlist(japan.mra[-(J+1)]), ncol=J, byrow=FALSE), 1, sum),
++      start=1955, freq=4)
+> japan.nomean2 <- ts(japan.nomean[42:169], start=1965.25, freq=4)
+> plot(japan.nomean2, type="l")
+> japan.dwpt <- dwpt(japan.nomean2, wf, 6)
+> japan.basis <-
++   ortho.basis(portmanteau.test(japan.dwpt, p=0.01, type="other"))
+> # Not implemented yet
+> # par(mfrow=c(1,1))
+> # plot.basis(japan.basis)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("qmf")
+> ### * qmf
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: qmf
+> ### Title: Quadrature Mirror Filter
+> ### Aliases: qmf
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> ## Haar wavelet filter
+> g <- wave.filter("haar")$lpf
+> qmf(g)
+[1]  0.7071068 -0.7071068
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sdf")
+> ### * sdf
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Spectral Density Functions
+> ### Title: Spectral Density Functions for Long-Memory Processes
+> ### Aliases: fdp.sdf spp.sdf spp2.sdf sfd.sdf
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> dB <- function(x) 10 * log10(x)
+> 
+> fdp.main <- expression(paste("FD", group("(",d==0.4,")")))
+> sfd.main <- expression(paste("SFD", group("(",list(s==12, d==0.4),")")))
+> spp.main <- expression(paste("SPP",
++     group("(",list(delta==0.4, f[G]==1/12),")")))
+> 
+> freq <- 0:512/1024
+> 
+> par(mfrow=c(2,2), mar=c(5-1,4,4-1,2), col.main="darkred")
+> plot(freq, dB(fdp.sdf(freq, .4)), type="l", xlab="frequency",
++      ylab="spectrum (dB)", main=fdp.main)
+> plot(freq, dB(spp.sdf(freq, .4, 1/12)), type="l", xlab="frequency",
++      ylab="spectrum (dB)", font.main=1, main=spp.main)
+> plot(freq, dB(sfd.sdf(freq, 12, .4)), type="l", xlab="frequency",
++      ylab="spectrum (dB)", main=sfd.main)
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("shift.2d")
+> ### * shift.2d
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: shift.2d
+> ### Title: Circularly Shift Matrices from a 2D MODWT
+> ### Aliases: shift.2d
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> n <- 512
+> G1 <- G2 <- dnorm(seq(-n/4, n/4, length=n))
+> G <- 100 * zapsmall(outer(G1, G2))
+> G <- modwt.2d(G, wf="la8", J=6)
+> k <- 50
+> xr <- yr <- trunc(n/2) + (-k:k)
+> par(mfrow=c(3,3), mar=c(1,1,2,1), pty="s")
+> for (j in names(G)[1:9]) {
++   image(G[[j]][xr,yr], col=rainbow(64), axes=FALSE, main=j)
++ }
+> Gs <- shift.2d(G)
+> for (j in names(G)[1:9]) {
++   image(Gs[[j]][xr,yr], col=rainbow(64), axes=FALSE, main=j)
++ }
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("spin.covariance")
+> ### * spin.covariance
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: spin.covariance
+> ### Title: Compute Wavelet Cross-Covariance Between Two Time Series
+> ### Aliases: spin.covariance spin.correlation
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> ## Figure 7.9 from Gencay, Selcuk and Whitcher (2001)
+> data(exchange)
+> returns <- diff(log(exchange))
+> returns <- ts(returns, start=1970, freq=12)
+> wf <- "d4"
+> demusd.modwt <- modwt(returns[,"DEM.USD"], wf, 8)
+> demusd.modwt.bw <- brick.wall(demusd.modwt, wf)
+> jpyusd.modwt <- modwt(returns[,"JPY.USD"], wf, 8)
+> jpyusd.modwt.bw <- brick.wall(jpyusd.modwt, wf)
+> n <- dim(returns)[1]
+> J <- 6
+> lmax <- 36
+> returns.cross.cor <- NULL
+> for(i in 1:J) {
++   blah <- spin.correlation(demusd.modwt.bw[[i]], jpyusd.modwt.bw[[i]], lmax)
++   returns.cross.cor <- cbind(returns.cross.cor, blah)
++ }
+> returns.cross.cor <- ts(as.matrix(returns.cross.cor), start=-36, freq=1)
+> dimnames(returns.cross.cor) <- list(NULL, paste("Level", 1:J))
+> lags <- length(-lmax:lmax)
+> lower.ci <- tanh(atanh(returns.cross.cor) - qnorm(0.975) /
++                  sqrt(matrix(trunc(n/2^(1:J)), nrow=lags, ncol=J, byrow=TRUE)
++                       - 3))
+> upper.ci <- tanh(atanh(returns.cross.cor) + qnorm(0.975) /
++                  sqrt(matrix(trunc(n/2^(1:J)), nrow=lags, ncol=J, byrow=TRUE)
++                       - 3))
+> par(mfrow=c(3,2), las=1, pty="m", mar=c(5,4,4,2)+.1)
+> for(i in J:1) {
++   plot(returns.cross.cor[,i], ylim=c(-1,1), xaxt="n", xlab="Lag (months)",
++        ylab="", main=dimnames(returns.cross.cor)[[2]][i])
++   axis(side=1, at=seq(-36, 36, by=12))
++   lines(lower.ci[,i], lty=1, col=2)
++   lines(upper.ci[,i], lty=1, col=2)
++   abline(h=0,v=0)
++ }
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("squared.gain")
+> ### * squared.gain
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: squared.gain
+> ### Title: Squared Gain Function of a Filter
+> ### Aliases: squared.gain
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> par(mfrow=c(2,2))
+> f.seq <- "H"
+> plot(0:256/512, squared.gain("d4", f.seq), type="l", ylim=c(0,2),
++      xlab="frequency", ylab="L = 4", main="Level 1")
+> lines(0:256/512, squared.gain("fk4", f.seq), col=2)
+> lines(0:256/512, squared.gain("mb4", f.seq), col=3)
+> abline(v=c(1,2)/4, lty=2)
+> legend(-.02, 2, c("Daubechies", "Fejer-Korovkin", "Minimum-Bandwidth"),
++        lty=1, col=1:3, bty="n", cex=1)
+> f.seq <- "HL"
+> plot(0:256/512, squared.gain("d4", f.seq), type="l", ylim=c(0,4),
++      xlab="frequency", ylab="", main="Level 2")
+> lines(0:256/512, squared.gain("fk4", f.seq), col=2)
+> lines(0:256/512, squared.gain("mb4", f.seq), col=3)
+> abline(v=c(1,2)/8, lty=2)
+> f.seq <- "H"
+> plot(0:256/512, squared.gain("d8", f.seq), type="l", ylim=c(0,2),
++      xlab="frequency", ylab="L = 8", main="")
+> lines(0:256/512, squared.gain("fk8", f.seq), col=2)
+> lines(0:256/512, squared.gain("mb8", f.seq), col=3)
+> abline(v=c(1,2)/4, lty=2)
+> f.seq <- "HL"
+> plot(0:256/512, squared.gain("d8", f.seq), type="l", ylim=c(0,4),
++      xlab="frequency", ylab="", main="")
+> lines(0:256/512, squared.gain("fk8", f.seq), col=2)
+> lines(0:256/512, squared.gain("mb8", f.seq), col=3)
+> abline(v=c(1,2)/8, lty=2)
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("wave.variance")
+> ### * wave.variance
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: wave.variance
+> ### Title: Wavelet Analysis of Univariate/Bivariate Time Series
+> ### Aliases: wave.variance wave.covariance wave.correlation
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> ## Figure 7.3 from Gencay, Selcuk and Whitcher (2001)
+> data(ar1)
+> ar1.modwt <- modwt(ar1, "haar", 6)
+> ar1.modwt.bw <- brick.wall(ar1.modwt, "haar")
+> ar1.modwt.var2 <- wave.variance(ar1.modwt.bw, type="gaussian")
+> ar1.modwt.var <- wave.variance(ar1.modwt.bw, type="nongaussian")
+> par(mfrow=c(1,1), las=1, mar=c(5,4,4,2)+.1)
+> matplot(2^(0:5), ar1.modwt.var2[-7,], type="b", log="xy",
++         xaxt="n", ylim=c(.025, 6), pch="*LU", lty=1, col=c(1,4,4),
++         xlab="Wavelet Scale", ylab="")
+> matlines(2^(0:5), as.matrix(ar1.modwt.var)[-7,2:3], type="b",
++          pch="LU", lty=1, col=3)
+> axis(side=1, at=2^(0:5))
+> legend(1, 6, c("Wavelet variance", "Gaussian CI", "Non-Gaussian CI"),
++        lty=1, col=c(1,4,3), bty="n")
+> 
+> ## Figure 7.8 from Gencay, Selcuk and Whitcher (2001)
+> data(exchange)
+> returns <- diff(log(as.matrix(exchange)))
+> returns <- ts(returns, start=1970, freq=12)
+> wf <- "d4"
+> J <- 6
+> demusd.modwt <- modwt(returns[,"DEM.USD"], wf, J)
+> demusd.modwt.bw <- brick.wall(demusd.modwt, wf)
+> jpyusd.modwt <- modwt(returns[,"JPY.USD"], wf, J)
+> jpyusd.modwt.bw <- brick.wall(jpyusd.modwt, wf)
+> returns.modwt.cov <- wave.covariance(demusd.modwt.bw, jpyusd.modwt.bw)
+> par(mfrow=c(1,1), las=0, mar=c(5,4,4,2)+.1)
+> matplot(2^(0:(J-1)), returns.modwt.cov[-(J+1),], type="b", log="x",
++         pch="*LU", xaxt="n", lty=1, col=c(1,4,4), xlab="Wavelet Scale", 
++         ylab="Wavelet Covariance")
+> axis(side=1, at=2^(0:7))
+> abline(h=0)
+> 
+> returns.modwt.cor <- wave.correlation(demusd.modwt.bw, jpyusd.modwt.bw,
++                                       N = dim(returns)[1])
+Warning in sqrt(n - 3) : NaNs produced
+Warning in sqrt(n - 3) : NaNs produced
+> par(mfrow=c(1,1), las=0, mar=c(5,4,4,2)+.1)
+> matplot(2^(0:(J-1)), returns.modwt.cor[-(J+1),], type="b", log="x",
++         pch="*LU", xaxt="n", lty=1, col=c(1,4,4), xlab="Wavelet Scale", 
++         ylab="Wavelet Correlation")
+> axis(side=1, at=2^(0:7))
+> abline(h=0)
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("wavelet.filter")
+> ### * wavelet.filter
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: wavelet.filter
+> ### Title: Higher-Order Wavelet Filters
+> ### Aliases: wavelet.filter
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> ## Figure 4.14 in Gencay, Selcuk and Whitcher (2001)
+> par(mfrow=c(3,1), mar=c(5-2,4,4-1,2))
+> f.seq <- "HLLLLL"
+> plot(c(rep(0,33), wavelet.filter("mb4", f.seq), rep(0,33)), type="l",
++      xlab="", ylab="", main="D(4) in black, MB(4) in red")
+> lines(c(rep(0,33), wavelet.filter("d4", f.seq), rep(0,33)), col=2)
+> plot(c(rep(0,35), -wavelet.filter("mb8", f.seq), rep(0,35)), type="l",
++      xlab="", ylab="", main="D(8) in black, -MB(8) in red")
+> lines(c(rep(0,35), wavelet.filter("d8", f.seq), rep(0,35)), col=2)
+> plot(c(rep(0,39), wavelet.filter("mb16", f.seq), rep(0,39)), type="l",
++      xlab="", ylab="", main="D(16) in black, MB(16) in red")
+> lines(c(rep(0,39), wavelet.filter("d16", f.seq), rep(0,39)), col=2)
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("wpt.test")
+> ### * wpt.test
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: wpt.test
+> ### Title: Testing the Wavelet Packet Tree for White Noise
+> ### Aliases: cpgram.test css.test entropy.test portmanteau.test
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> data(mexm)
+> J <- 6
+> wf <- "la8"
+> mexm.dwpt <- dwpt(mexm[-(1:4)], wf, J)
+> ## Not implemented yet
+> ## plot.dwpt(x.dwpt, J)
+> mexm.dwpt.bw <- dwpt.brick.wall(mexm.dwpt, wf, 6, method="dwpt")
+> mexm.tree <- ortho.basis(portmanteau.test(mexm.dwpt.bw, p=0.025))
+> ## Not implemented yet
+> ## plot.basis(mexm.tree)
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  5.235 0.299 5.654 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

@@ -4,7 +4,7 @@
   txt <- paste("\n",
                pkg,
                ": Wavelet Method for 1/2/3D Signals (version = ",
-               packageDescription(pkg, lib)[["Version"]],
+               utils::packageDescription(pkg, lib)[["Version"]],
                ")\n",
                sep="")
   packageStartupMessage(txt)
