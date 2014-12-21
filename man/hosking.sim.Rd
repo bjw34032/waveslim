@@ -38,6 +38,7 @@ spp.sdf <- function(freq, delta, omega)
   abs(2 * (cos(2*pi*freq) - cos(2*pi*omega)))^(-2*delta)
 data(acvs.andel8)
 n <- 1024
+\dontrun{
 z <- hosking.sim(n, acvs.andel8[,2])
 per.z <- 2 * pi * per(z)
 par(mfrow=c(2,1), las=1)
@@ -45,6 +46,7 @@ plot.ts(z, ylab="", main="Realization of a Seasonal Long-Memory Process")
 plot(0:(n/2)/n, dB(per.z), type="l", xlab="Frequency", ylab="dB",
      main="Periodogram")
 lines(0:(n/2)/n, dB(spp.sdf(0:(n/2)/n, .4, 1/12)), col=2)
+}
 }
 \author{Brandon Whitcher}
 \keyword{ts}
