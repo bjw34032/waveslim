@@ -5,7 +5,7 @@ Title: Basic wavelet routines for one-, two- and three-dimensional signal
   processing
 Author: Brandon Whitcher
 Maintainer: Brandon Whitcher <bwhitcher@gmail.com>
-Depends: R (>= 2.10.0), graphics, grDevices, stats, utils
+Depends: R (>= 2.11.0), graphics, grDevices, stats, utils
 Suggests: fftw
 Description: Basic wavelet routines for time series (1D), image (2D) 
   and array (3D) analysis.  The code provided here is based on
