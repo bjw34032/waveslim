@@ -1,7 +1,7 @@
 
-R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
-Copyright (C) 2013 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin10.8.0 (64-bit)
+R Under development (unstable) (2015-01-07 r67351) -- "Unsuffered Consequences"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-unknown-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -22,7 +22,7 @@ Type 'q()' to quit R.
 > options(warn = 1)
 > library('waveslim')
 
-waveslim: Wavelet Method for 1/2/3D Signals (version = 1.7.4)
+waveslim: Wavelet Method for 1/2/3D Signals (version = 1.7.5)
 
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
@@ -101,22 +101,23 @@ waveslim: Wavelet Method for 1/2/3D Signals (version = 1.7.4)
 > ### ** Examples
 > 
 > data(acvs.andel8)
-> x <- hosking.sim(1024, acvs.andel8[,2])
-> x.dwpt <- dwpt(x, "la8", 7)
-> ## Select orthonormal basis from wavelet packet tree
-> x.basis <- basis(x.dwpt, c("w1.1","w2.1","w3.0","w4.3","w5.4","w6.10",
-+                            "w7.22","w7.23"))
-> for(i in 1:length(x.dwpt))
-+   x.dwpt[[i]] <- x.basis[i] * x.dwpt[[i]]
-> ## Resonstruct original series using selected orthonormal basis
-> y <- idwpt(x.dwpt, x.basis)
-> par(mfrow=c(2,1), mar=c(5-1,4,4-1,2))
-> plot.ts(x, xlab="", ylab="", main="Original Series")
-> plot.ts(y, xlab="", ylab="", main="Reconstructed Series")
+> ## Not run: 
+> ##D x <- hosking.sim(1024, acvs.andel8[,2])
+> ##D x.dwpt <- dwpt(x, "la8", 7)
+> ##D ## Select orthonormal basis from wavelet packet tree
+> ##D x.basis <- basis(x.dwpt, c("w1.1","w2.1","w3.0","w4.3","w5.4","w6.10",
+> ##D                            "w7.22","w7.23"))
+> ##D for(i in 1:length(x.dwpt))
+> ##D   x.dwpt[[i]] <- x.basis[i] * x.dwpt[[i]]
+> ##D ## Resonstruct original series using selected orthonormal basis
+> ##D y <- idwpt(x.dwpt, x.basis)
+> ##D par(mfrow=c(2,1), mar=c(5-1,4,4-1,2))
+> ##D plot.ts(x, xlab="", ylab="", main="Original Series")
+> ##D plot.ts(y, xlab="", ylab="", main="Reconstructed Series")
+> ## End(Not run)
 > 
 > 
 > 
-> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
 > cleanEx()
 > nameEx("cplxdual")
 > ### * cplxdual
@@ -570,17 +571,18 @@ $lpf[[2]]
 +   abs(2 * (cos(2*pi*freq) - cos(2*pi*omega)))^(-2*delta)
 > data(acvs.andel8)
 > n <- 1024
-> z <- hosking.sim(n, acvs.andel8[,2])
-> per.z <- 2 * pi * per(z)
-> par(mfrow=c(2,1), las=1)
-> plot.ts(z, ylab="", main="Realization of a Seasonal Long-Memory Process")
-> plot(0:(n/2)/n, dB(per.z), type="l", xlab="Frequency", ylab="dB",
-+      main="Periodogram")
-> lines(0:(n/2)/n, dB(spp.sdf(0:(n/2)/n, .4, 1/12)), col=2)
+> ## Not run: 
+> ##D z <- hosking.sim(n, acvs.andel8[,2])
+> ##D per.z <- 2 * pi * per(z)
+> ##D par(mfrow=c(2,1), las=1)
+> ##D plot.ts(z, ylab="", main="Realization of a Seasonal Long-Memory Process")
+> ##D plot(0:(n/2)/n, dB(per.z), type="l", xlab="Frequency", ylab="dB",
+> ##D      main="Periodogram")
+> ##D lines(0:(n/2)/n, dB(spp.sdf(0:(n/2)/n, .4, 1/12)), col=2)
+> ## End(Not run)
 > 
 > 
 > 
-> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
 > cleanEx()
 > nameEx("modwt.2d")
 > ### * modwt.2d
@@ -1109,7 +1111,7 @@ Warning in sqrt(n - 3) : NaNs produced
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  5.235 0.299 5.654 0 0 
+Time elapsed:  7.446 0.101 7.536 0 0 
 > grDevices::dev.off()
 null device 
           1 
