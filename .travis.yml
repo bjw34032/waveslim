@@ -4,6 +4,8 @@ language: R
 sudo: required
 cache: packages
 
+r_build_args: --resave-data
+
 before_install:
 before_install:
   - sudo apt-get update -qq
