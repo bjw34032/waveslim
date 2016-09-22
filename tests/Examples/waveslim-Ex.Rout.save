@@ -22,7 +22,7 @@ Type 'q()' to quit R.
 > options(warn = 1)
 > library('waveslim')
 
-waveslim: Wavelet Method for 1/2/3D Signals (version = 1.7.5)
+waveslim: Wavelet Method for 1/2/3D Signals (version = 1.7.7)
 
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
