@@ -7,6 +7,5 @@ cache: packages
 r_build_args: --resave-data
 
 before_install:
-before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq fftw3 fftw3-dev
