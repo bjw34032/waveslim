@@ -1,5 +1,5 @@
 Package: waveslim
-Version: 1.7.7
+Version: 1.7.8
 Date: 2016-10-01
 Title: Basic Wavelet Routines for One-, Two-, and Three-dimensional Signal 
   Processing
@@ -20,5 +20,4 @@ Description: Basic wavelet routines for time series (1D), image (2D)
 License: BSD_3_clause + file LICENSE
 URL: http://waveslim.blogspot.com, http://www2.imperial.ac.uk/~bwhitche/book
 biocViews: 
-LazyDataCompression: xz
-LazyData: yes
+
