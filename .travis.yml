@@ -7,6 +7,11 @@ use_bioc: true
 bioc_required: true
 cran: http://cran.rstudio.com
 
+addons:
+  apt:
+    packages:
+    - libfftw3-dev
+
 os:
   - linux
   - osx
