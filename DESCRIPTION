@@ -20,3 +20,5 @@ Description: Basic wavelet routines for time series (1D), image (2D)
 License: BSD_3_clause + file LICENSE
 URL: http://waveslim.blogspot.com, http://www2.imperial.ac.uk/~bwhitche/book
 biocViews: 
+LazyDataCompression: xz
+LazyData: yes
