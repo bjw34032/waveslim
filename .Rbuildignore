@@ -1,3 +1,6 @@
 ^\.travis\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^DESCRIPTION\.bak$
+data/readdata\.R$
+data/old_txt\.zip$

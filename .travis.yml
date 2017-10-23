@@ -1,12 +1,68 @@
-# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
-
-language: R
-sudo: required
+# Neuroconductor Template no ANTs
+language: r
+sudo: false
 cache: packages
+warnings_are_errors: true
+use_bioc: true
+bioc_required: true
+cran: http://cran.rstudio.com
 
-r_build_args: --resave-data
+addons:
+  apt:
+    packages:
+    - libfftw3-dev
+
+os:
+  - linux
+  - osx
+
+env:
+  global: 
+    - RGL_USE_NULL=TRUE
+    - PROJECT_NAME=neuroconductor
+
+r_check_args: --as-cran
+# r_check_args: "--as-cran --install-args=--build"
 
 before_install:
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq fftw3 fftw3-dev
+  - export PROJ_DIR=`basename $PWD`    
+  - fname=travis_helpers.sh
+  - wget -O ${fname} http://bit.ly/travis_helpers
+  - cat ${fname}; source ${fname}; rm ${fname}  
+  - cat DESCRIPTION
+  - Rscript -e 'source("https://install-github.me/mangothecat/callr")'
+  - remove_neuroc_packages 
+  - cat DESCRIPTION
+  - install_remotes_no_dep
+  - cat DESCRIPTION
+  - export PACKAGE_NAME=`package_name`
+  - if [[ "${PACKAGE_NAME}" == "waveslim" ]]; 
+    then
+      fftw_install ;
+    fi
+
+after_success:
+  - cat ${PACKAGE_NAME}.Rcheck/00install.out
+  - cat ${PACKAGE_NAME}.Rcheck/00check.log
+
+after_failure:
+  - cat ${PACKAGE_NAME}.Rcheck/00install.out
+  - cat ${PACKAGE_NAME}.Rcheck/00check.log
+
+# need this explicitly
+# for naming convention
+before_deploy:
+  - travis_wait 100 R CMD INSTALL --build ${PKG_TARBALL}
+  # so no overwrite of linux build
+  - if [[ "${TRAVIS_OS_NAME}" = "osx" ]];
+    then
+      rm -f *.tar.gz;
+    fi
+
+
+after_deploy:
+  # travis_wait 100 Rscript -e 'covr::coveralls(type = "all")' ;
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; 
+    then
+      Rscript -e 'covr::coveralls(type = "all")' ;
+    fi
