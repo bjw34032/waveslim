@@ -14,6 +14,6 @@
 \source{Data management centre, Washington University.
 }
 \references{
-  \url{http://www-personal.buseco.monash.edu.au/~hyndman/TSDL/}
+  \url{https://datamarket.com/data/list/?q=provider:tsdl}
 }
 \keyword{datasets}

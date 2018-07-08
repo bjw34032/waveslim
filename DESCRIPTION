@@ -1,7 +1,7 @@
 Package: waveslim
-Version: 1.7.8
-Date: 2016-10-01
-Title: Basic Wavelet Routines for One-, Two-, and Three-dimensional Signal 
+Version: 1.8.0
+Date: 2018-03-17
+Title: Basic Wavelet Routines for One-, Two-, and Three-Dimensional Signal 
   Processing
 Author: Brandon Whitcher
 Maintainer: Brandon Whitcher <bwhitcher@gmail.com>
@@ -18,6 +18,6 @@ Description: Basic wavelet routines for time series (1D), image (2D)
   figures in chapters 4-7 of GSW (2001) are reproducible using this 
   package and R code available at the book website(s) below.
 License: BSD_3_clause + file LICENSE
-URL: http://waveslim.blogspot.com, http://www2.imperial.ac.uk/~bwhitche/book
+URL: http://waveslim.blogspot.com
 biocViews: 
 
