@@ -24,10 +24,10 @@ dwt.hilbert <- function(x, wf, n.levels=4, boundary="periodic", ...) {
   x.h <- x.g <- x
   for(j in 1:J) {
     W <- V <- numeric(N/2^j)
-    out.h <- .C("dwt", as.double(x.h), as.integer(N/2^(j-1)), L, h1, h0, 
-                W = W, V = V, PACKAGE = "waveslim")[6:7]
-    out.g <- .C("dwt", as.double(x.g), as.integer(N/2^(j-1)), L, g1, g0, 
-                W = W, V = V, PACKAGE = "waveslim")[6:7]
+    out.h <- .C(C_dwt, as.double(x.h), as.integer(N/2^(j-1)), L, h1, h0, 
+                W = W, V = V)[6:7]
+    out.g <- .C(C_dwt, as.double(x.g), as.integer(N/2^(j-1)), L, g1, g0, 
+                W = W, V = V)[6:7]
     y[[j]] <- complex(real = out.h$W, imaginary = out.g$W)
     x.h <- out.h$V
     x.g <- out.g$V
@@ -74,8 +74,8 @@ idwt.hilbert <- function(y) {
   for(j in J:1) {
     jj <- paste("d", j, sep="")
     XX <- numeric(2 * length(y[[jj]]))
-    X <- .C("idwt", y[[jj]], as.double(X), as.integer(length(X)),
-            L, h, g, XX=XX, PACKAGE="waveslim")$XX
+    X <- .C(C_idwt, y[[jj]], as.double(X), as.integer(length(X)),
+            L, h, g, XX=XX)$XX
   }
   return(X)
 }
@@ -105,10 +105,10 @@ modwt.hilbert <- function(x, wf, n.levels=4, boundary="periodic", ...) {
 
   x.h <- x.g <- x  
   for(j in 1:J) {
-    out.h <- .C("modwt", as.double(x.h), N, as.integer(j), L, h1, h0,
-                W = W, V = V, PACKAGE="waveslim")[7:8]
-    out.g <- .C("modwt", as.double(x.g), N, as.integer(j), L, g1, g0,
-                W = W, V = V, PACKAGE="waveslim")[7:8]
+    out.h <- .C(C_modwt, as.double(x.h), N, as.integer(j), L, h1, h0,
+                W = W, V = V)[7:8]
+    out.g <- .C(C_modwt, as.double(x.g), N, as.integer(j), L, g1, g0,
+                W = W, V = V)[7:8]
     y[[j]] <- complex(real = out.h$W, imaginary = out.g$W)
     x.h <- out.h$V
     x.g <- out.g$V
@@ -137,8 +137,8 @@ imodwt.hilbert <- function(y) {
   XX <- numeric(N)
   for(j in J:1) {
     jj <- paste("d", j, sep="")
-    X <- .C("imodwt", y[[jj]], X, as.integer(N), as.integer(j), 
-      as.integer(L), ht, gt, XX, PACKAGE="waveslim")[[8]]
+    X <- .C(C_imodwt, y[[jj]], X, as.integer(N), as.integer(j), 
+      as.integer(L), ht, gt, XX)[[8]]
   }
   return(X)
 }
@@ -336,18 +336,18 @@ modwpt.hilbert <- function(x, wf, n.levels=4, boundary="periodic") {
         x <- complex(real=x, imaginary=x)
 
       if(n %% 2 == 0) {
-        zr <- .C("modwt", as.double(Re(x)), N, as.integer(j), L, h1, h0, 
-                 W = W, V = V, PACKAGE="waveslim")[7:8]
-        zc <- .C("modwt", as.double(Im(x)), N, as.integer(j), L, g1, g0, 
-                 W = W, V = V, PACKAGE="waveslim")[7:8]
+        zr <- .C(C_modwt, as.double(Re(x)), N, as.integer(j), L, h1, h0, 
+                 W = W, V = V)[7:8]
+        zc <- .C(C_modwt, as.double(Im(x)), N, as.integer(j), L, g1, g0, 
+                 W = W, V = V)[7:8]
         y[[jj + 2*n + 1]] <- complex(real=zr$W, imaginary=zc$W)
         y[[jj + 2*n]] <- complex(real=zr$V, imaginary=zc$V)
       }
       else {
-        zr <- .C("modwt", as.double(Re(x)), N, as.integer(j), L, h1, h0, 
-                 W = W, V = V, PACKAGE="waveslim")[7:8]
-        zc <- .C("modwt", as.double(Im(x)), N, as.integer(j), L, g1, g0, 
-                 W = W, V = V, PACKAGE="waveslim")[7:8]
+        zr <- .C(C_modwt, as.double(Re(x)), N, as.integer(j), L, h1, h0, 
+                 W = W, V = V)[7:8]
+        zc <- .C(C_modwt, as.double(Im(x)), N, as.integer(j), L, g1, g0, 
+                 W = W, V = V)[7:8]
         y[[jj + 2*n]] <- complex(real=zr$W, imaginary=zc$W)
         y[[jj + 2*n + 1 ]] <- complex(real=zr$V, imaginary=zc$V)
       }

@@ -8,7 +8,7 @@ dpss.taper <- function(n, k, nw = 4, nmax = 2^(ceiling(log(n,2)))) {
     stop("positive dpss order (k) required")
   v <- matrix(0, nrow = nmax, ncol = (k + 1))
   storage.mode(v) <- "double"
-  out <- .Fortran("dpss",
+  out <- .Fortran(C_dpss,
                   nmax = as.integer(nmax),
                   kmax = as.integer(k),
                   n = as.integer(n),
@@ -20,8 +20,7 @@ dpss.taper <- function(n, k, nw = 4, nmax = 2^(ceiling(log(n,2)))) {
                   vold = double(n),
                   u = double(n),
                   scr1 = double(n),
-                  ifault = integer(1),
-                  PACKAGE="waveslim")
+                  ifault = integer(1))
   ##list(v = out$v[1:n, 1:k], eigen = out$sig[-1] + 1, iter = 
   ##     out$totiTRUE, n = out$n, w = out$w, ifault = out$ifault)
   return(out$v[1:n, 1:k])

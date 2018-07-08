@@ -23,8 +23,8 @@ dwt <- function(x, wf="la8", n.levels=4, boundary="periodic")
   names(y) <- c(paste("d", 1:J, sep=""), paste("s", J, sep=""))
   for(j in 1:J) {
     W <- V <- numeric(N/2^j)
-    out <- .C("dwt", as.double(x), as.integer(N/2^(j-1)), L, h, g, 
-              W=as.double(W), V=as.double(V), PACKAGE="waveslim")[6:7]
+    out <- .C(C_dwt, as.double(x), as.integer(N/2^(j-1)), L, h, g, 
+              W=as.double(W), V=as.double(V))[6:7]
     y[[j]] <- out$W
     x <- out$V
   }
@@ -70,8 +70,8 @@ idwt <- function(y)
     jj <- paste("d", j, sep="")
     N <- length(X)
     XX <- numeric(2 * length(y[[jj]]))
-    X <- .C("idwt", as.double(y[[jj]]), as.double(X), as.integer(N), L, 
-            h, g, out=as.double(XX), PACKAGE="waveslim")$out
+    X <- .C(C_idwt, as.double(y[[jj]]), as.double(X), as.integer(N), L, 
+            h, g, out=as.double(XX))$out
   }
   if(attr(y, "boundary") == "reflection") return(X[1:N])
   else return(X)
@@ -104,8 +104,8 @@ modwt <- function(x, wf="la8", n.levels=4, boundary="periodic")
   storage.mode(V) <- "double"
   
   for(j in 1:J) {
-    out <- .C("modwt", as.double(x), N, as.integer(j), L, ht, gt, 
-              W=W, V=V, PACKAGE="waveslim")[7:8]
+    out <- .C(C_modwt, as.double(x), N, as.integer(j), L, ht, gt, 
+              W=W, V=V)[7:8]
     y[[j]] <- out$W
     x <- out$V
   }
@@ -140,8 +140,8 @@ imodwt <- function(y)
   storage.mode(XX) <- "double"
   for(j in J:1) {
     jj <- paste("d", j, sep="")
-    X <- .C("imodwt", as.double(y[[jj]]), as.double(X), N, as.integer(j), 
-            L, ht, gt, out=XX, PACKAGE="waveslim")$out
+    X <- .C(C_imodwt, as.double(y[[jj]]), as.double(X), N, as.integer(j), 
+            L, ht, gt, out=XX)$out
   }
   if(attr(y, "boundary") == "reflection") return(X[1:(N/2)])
   else return(X)

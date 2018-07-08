@@ -26,14 +26,14 @@ dwpt <- function(x, wf="la8", n.levels=4, boundary="periodic") {
         x <- y[[(1:length(crystals1))[crystals1 == j-1][n+1]]]
       W <- V <- numeric(N/2^j)
       if(n %% 2 == 0) {
-        z <- .C("dwt", as.double(x), as.integer(N/2^(j-1)), L, h, g, 
-	  W=as.double(W), V=as.double(V), PACKAGE="waveslim")
+        z <- .C(C_dwt, as.double(x), as.integer(N/2^(j-1)), L, h, g, 
+	  W=as.double(W), V=as.double(V))
         y[[jj + 2*n + 1]] <- z$W
         y[[jj + 2*n]] <- z$V
       }
       else {
-        z <- .C("dwt", as.double(x), as.integer(N/2^(j-1)), L, h, g,
-                W=as.double(W), V=as.double(V), PACKAGE="waveslim")
+        z <- .C(C_dwt, as.double(x), as.integer(N/2^(j-1)), L, h, g,
+                W=as.double(W), V=as.double(V))
         y[[jj + 2*n]] <- z$W
         y[[jj + 2*n + 1 ]] <- z$V
       }
@@ -64,13 +64,11 @@ idwpt <- function(y, y.basis)
         m <- length(y[[n]])
         XX <- numeric(2 * m)
         if(floor((n-a)/2) %% 2 == 0)
-          X <- .C("idwt", as.double(y[[n+1]]), as.double(y[[n]]),
-                  as.integer(m), L, h, g, out=as.double(XX),
-                  PACKAGE="waveslim")$out
+          X <- .C(C_idwt, as.double(y[[n+1]]), as.double(y[[n]]),
+                  as.integer(m), L, h, g, out=as.double(XX))$out
         else
-          X <- .C("idwt", as.double(y[[n]]), as.double(y[[n+1]]), 
-                  as.integer(m), L, h, g, out=as.double(XX),
-                  PACKAGE="waveslim")$out
+          X <- .C(C_idwt, as.double(y[[n]]), as.double(y[[n+1]]), 
+                  as.integer(m), L, h, g, out=as.double(XX))$out
         if(j != 1) {
           y[[a-(b-a+1)/2 + (n-a)/2]] <- X
           y.basis[[a-(b-a+1)/2 + (n-a)/2]] <- 1
@@ -201,14 +199,14 @@ modwpt <- function(x, wf="la8", n.levels=4, boundary="periodic")
       if(j > 1)
         x <- y[[(1:yn)[crystals1 == j-1][index]]]
       if(n %% 2 == 0) {
-        z <- .C("modwt", as.double(x), N, as.integer(j), L, ht, gt, 
-                W = W, V = V, PACKAGE = "waveslim")[7:8]
+        z <- .C(C_modwt, as.double(x), N, as.integer(j), L, ht, gt, 
+                W = W, V = V)[7:8]
         y[[jj + 2*n + 1]] <- z$W
         y[[jj + 2*n]] <- z$V
       }
       else {
-        z <- .C("modwt", as.double(x), N, as.integer(j), L, ht, gt, 
-                W = W, V = V, PACKAGE = "waveslim")[7:8]
+        z <- .C(C_modwt, as.double(x), N, as.integer(j), L, ht, gt, 
+                W = W, V = V)[7:8]
         y[[jj + 2*n]] <- z$W
         y[[jj + 2*n + 1 ]] <- z$V
       }

@@ -16,7 +16,7 @@ void two_D_dwt(double *X, int *M, int *N, int *L, double *h, double *g,
  
  
  
-  int i, j, k,jj;
+  int i, j, k;
   double *data, *Wout, *Vout, *Low, *High;
   
   

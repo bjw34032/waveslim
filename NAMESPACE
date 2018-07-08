@@ -1,6 +1,6 @@
-useDynLib("waveslim")
+useDynLib("waveslim", .registration = TRUE, .fixes = "C_")
 
-exportPattern("^[^\\.]")
+exportPattern("^[^C_]")
 importFrom("grDevices", "rainbow")
 importFrom("graphics", "axis", "box", "image", "lines", "mtext", "par",
            "plot")

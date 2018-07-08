@@ -23,9 +23,9 @@ dwt.2d <- function(x, wf, J=4, boundary="periodic")
   x.wt <- vector("list", 3*J+1)
   x.names <- NULL
   for(j in 1:J) {
-    out <- .C("two_D_dwt", "Image"=as.double(x), "Rows"=m, "Cols"=n, 
+    out <- .C(C_two_D_dwt, "Image"=as.double(x), "Rows"=m, "Cols"=n, 
                 "filter.length"=L, "hpf"=h, "lpf"=g, "LL"=z, "LH"=z,
-                "HL"=z, "HH"=z, PACKAGE="waveslim")[7:10]
+                "HL"=z, "HH"=z)[7:10]
     if(j < J) {
       index <- (3*j-2):(3*j)
       x.wt[index] <- out[-1]
@@ -84,9 +84,9 @@ idwt.2d <- function(y)
     x <- matrix(0, 2*m, 2*n)
     storage.mode(x) <- "double"
 
-    out <- .C("two_D_idwt", as.double(y.in), as.double(y[[LH]]),
+    out <- .C(C_two_D_idwt, as.double(y.in), as.double(y[[LH]]),
               as.double(y[[HL]]), as.double(y[[HH]]), m, n, L, h, g,
-              "Y"=x, PACKAGE="waveslim")
+              "Y"=x)
     y.in <- out$Y
   }
   zapsmall(y.in)
@@ -171,9 +171,9 @@ imodwt.2d <- function(y)
     x <- matrix(0, m, n)
     storage.mode(x) <- "double"
 
-    out <- .C("two_D_imodwt", as.double(y.in), as.double(y[[LH]]),
+    out <- .C(C_two_D_imodwt, as.double(y.in), as.double(y[[LH]]),
               as.double(y[[HL]]), as.double(y[[HH]]), m, n, j, L,
-              h, g, "Y"=x, PACKAGE="waveslim")
+              h, g, "Y"=x)
     y.in <- out$Y
   }
   zapsmall(y.in)
@@ -384,9 +384,9 @@ dwpt.2d <- function(x, wf="la8", J=4, boundary="periodic")
       HH <- paste(Xhigh, "-", Yhigh, sep="")
       ## cat(matrix(c(LH,LL,HH,HL), 2, 2), fill=TRUE)
       ## Perform the DWPT
-      out <- .C("two_D_dwt", "Image"=as.double(x), "Rows"=m, "Cols"=n, 
+      out <- .C(C_two_D_dwt, "Image"=as.double(x), "Rows"=m, "Cols"=n, 
                 "filter.length"=L, "hpf"=h, "lpf"=g, "LL"=z, "LH"=z,
-                "HL"=z, "HH"=z, PACKAGE="waveslim")[7:10]
+                "HL"=z, "HH"=z)[7:10]
       ## Pass wavelet coefficient images into the DWPT object.
       x.wpt[[LL]] <- out[["LL"]]
       x.wpt[[LH]] <- out[["LH"]]
@@ -448,31 +448,27 @@ idwpt.2d <- function(y, y.basis)
           pny <- floor(ny / 2)
           if((pnx %% 2 != 0) & (pny %% 2 != 0))
             ## Upper right-hand corner
-            out <- .C("two_D_idwt", as.double(y[[HH]]),
+            out <- .C(C_two_D_idwt, as.double(y[[HH]]),
                       as.double(y[[HL]]), as.double(y[[LH]]),
-                      as.double(y[[LL]]), m, n, L, h, g, "Y"=XX,
-                      PACKAGE="waveslim")$Y
+                      as.double(y[[LL]]), m, n, L, h, g, "Y"=XX)$Y
           else {
             ## Upper left-hand corner
             if((pnx %% 2 == 0) & (pny %% 2 != 0))
-              out <- .C("two_D_idwt", as.double(y[[LH]]),
+              out <- .C(C_two_D_idwt, as.double(y[[LH]]),
                         as.double(y[[LL]]), as.double(y[[HH]]),
-                        as.double(y[[HL]]), m, n, L, h, g, "Y"=XX,
-                        PACKAGE="waveslim")$Y
+                        as.double(y[[HL]]), m, n, L, h, g, "Y"=XX)$Y
             else {
               ## Lower right-hand corner
               if((pnx %% 2 != 0) & (pny %% 2 == 0))
-                out <- .C("two_D_idwt", as.double(y[[HL]]),
+                out <- .C(C_two_D_idwt, as.double(y[[HL]]),
                           as.double(y[[HH]]), as.double(y[[LL]]),
-                          as.double(y[[LH]]), m, n, L, h, g, "Y"=XX,
-                          PACKAGE="waveslim")$Y
+                          as.double(y[[LH]]), m, n, L, h, g, "Y"=XX)$Y
               else {
                 ## Lower left-hand corner
                 if((pnx %% 2 == 0) & (pny %% 2 == 0))
-                  out <- .C("two_D_idwt", as.double(y[[LL]]),
+                  out <- .C(C_two_D_idwt, as.double(y[[LL]]),
                             as.double(y[[LH]]), as.double(y[[HL]]),
-                            as.double(y[[HH]]), m, n, L, h, g, "Y"=XX,
-                            PACKAGE="waveslim")$Y
+                            as.double(y[[HH]]), m, n, L, h, g, "Y"=XX)$Y
                 else
                   stop("Ouch!")
               }
