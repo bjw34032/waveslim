@@ -1,6 +1,6 @@
 Package: waveslim
-Version: 1.8.0
-Date: 2018-07-08
+Version: 1.8.2
+Date: 2020-02-13
 Title: Basic Wavelet Routines for One-, Two-, and Three-Dimensional Signal 
   Processing
 Author: Brandon Whitcher
@@ -20,4 +20,4 @@ Description: Basic wavelet routines for time series (1D), image (2D)
 License: BSD_3_clause + file LICENSE
 URL: http://waveslim.blogspot.com
 biocViews: 
-
+RoxygenNote: 7.0.2

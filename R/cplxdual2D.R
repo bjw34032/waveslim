@@ -27,7 +27,7 @@ cplxdual2D <- function(x, J, Faf, af) {
   ##   max(max(abs(err)))
   ##
   ## WAVELET SOFTWARE AT POLYTECHNIC UNIVERSITY, BROOKLYN, NY
-  ## http://taco.poly.edu/WaveletSoftware/
+  ## http://eeweb.poly.edu/iselesni/WaveletSoftware/
 
   ## normalization
   x <- x/2
@@ -78,7 +78,7 @@ icplxdual2D <- function(w, J, Fsf, sf) {
   ## See cplxdual2D
   ##
   ## WAVELET SOFTWARE AT POLYTECHNIC UNIVERSITY, BROOKLYN, NY
-  ## http://taco.poly.edu/WaveletSoftware/
+  ## http://eeweb.poly.edu/iselesni/WaveletSoftware/
 
   for (j in 1:J) {
     for (m in 1:3) {

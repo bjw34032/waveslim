@@ -30,7 +30,7 @@ icplxdual2D(w, J, Fsf, sf)
 }
 \references{
   WAVELET SOFTWARE AT POLYTECHNIC UNIVERSITY, BROOKLYN, NY\cr
-  \url{http://taco.poly.edu/WaveletSoftware/}
+  \url{http://eeweb.poly.edu/iselesni/WaveletSoftware/}
 }
 \seealso{
   \code{\link{FSfarras}}, \code{\link{farras}}, \code{\link{afb2D}}, 

@@ -67,7 +67,7 @@ sfb2D.A(lo, hi, sf, d)
 }
 \references{
   WAVELET SOFTWARE AT POLYTECHNIC UNIVERSITY, BROOKLYN, NY\cr
-  \url{http://taco.poly.edu/WaveletSoftware/}
+  \url{http://eeweb.poly.edu/iselesni/WaveletSoftware/}
 }
 %\seealso{}
 \examples{

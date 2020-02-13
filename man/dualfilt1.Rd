@@ -25,7 +25,7 @@ dualfilt1()
     the IEEE Int. Conf. on Image Proc.} (ICIP).
 
   WAVELET SOFTWARE AT POLYTECHNIC UNIVERSITY, BROOKLYN, NY\cr
-  \url{http://taco.poly.edu/WaveletSoftware/}
+  \url{http://eeweb.poly.edu/iselesni/WaveletSoftware/}
 }
 \seealso{
   \code{\link{dualtree}}

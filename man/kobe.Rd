@@ -13,7 +13,4 @@
 }
 \source{Data management centre, Washington University.
 }
-\references{
-  \url{https://datamarket.com/data/list/?q=provider:tsdl}
-}
 \keyword{datasets}

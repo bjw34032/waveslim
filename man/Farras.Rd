@@ -25,7 +25,7 @@ FSfarras()
   Signal Processing (ICASSP), May 2001.
 
   WAVELET SOFTWARE AT POLYTECHNIC UNIVERSITY, BROOKLYN, NY\cr
-  \url{http://taco.poly.edu/WaveletSoftware/}
+  \url{http://eeweb.poly.edu/iselesni/WaveletSoftware/}
 }
 \seealso{
   \code{\link{afb}}, \code{\link{dualtree}}, \code{\link{dualfilt1}}.
