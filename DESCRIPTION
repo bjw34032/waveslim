@@ -19,5 +19,4 @@ Description: Basic wavelet routines for time series (1D), image (2D)
   package and R code available at the book website(s) below.
 License: BSD_3_clause + file LICENSE
 URL: http://waveslim.blogspot.com
-biocViews: 
 RoxygenNote: 7.0.2
