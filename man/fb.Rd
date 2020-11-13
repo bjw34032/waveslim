@@ -65,10 +65,6 @@ sfb2D.A(lo, hi, sf, d)
   output array.
 
 }
-\references{
-  WAVELET SOFTWARE AT POLYTECHNIC UNIVERSITY, BROOKLYN, NY\cr
-  \url{http://eeweb.poly.edu/iselesni/WaveletSoftware/}
-}
 %\seealso{}
 \examples{
 ## EXAMPLE: afb, sfb

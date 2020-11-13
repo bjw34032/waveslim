@@ -23,10 +23,6 @@ pm(a, b)
   \item{v}{\eqn{(a - b)/sqrt(2)}}
 }
 %\details{}
-\references{
-  WAVELET SOFTWARE AT POLYTECHNIC UNIVERSITY, BROOKLYN, NY\cr
-  \url{http://eeweb.poly.edu/iselesni/WaveletSoftware/}
-}
 %\seealso{}
 %\examples{}
 \author{Matlab: S. Cai, K. Li and I. Selesnick; R port: B. Whitcher}

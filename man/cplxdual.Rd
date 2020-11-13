@@ -28,10 +28,6 @@ icplxdual2D(w, J, Fsf, sf)
   For the synthesis of \code{w}, the output is 
   \item{y}{output signal.}
 }
-\references{
-  WAVELET SOFTWARE AT POLYTECHNIC UNIVERSITY, BROOKLYN, NY\cr
-  \url{http://eeweb.poly.edu/iselesni/WaveletSoftware/}
-}
 \seealso{
   \code{\link{FSfarras}}, \code{\link{farras}}, \code{\link{afb2D}}, 
   \code{\link{sfb2D}}.

@@ -23,9 +23,6 @@ FSfarras()
   A. F. Abdelnour and I. W. Selesnick. \dQuote{Nearly symmetric
     orthogonal wavelet bases}, Proc. IEEE Int. Conf. Acoust., Speech,
   Signal Processing (ICASSP), May 2001.
-
-  WAVELET SOFTWARE AT POLYTECHNIC UNIVERSITY, BROOKLYN, NY\cr
-  \url{http://eeweb.poly.edu/iselesni/WaveletSoftware/}
 }
 \seealso{
   \code{\link{afb}}, \code{\link{dualtree}}, \code{\link{dualfilt1}}.

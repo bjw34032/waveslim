@@ -38,10 +38,6 @@ idualtree2D(w, J, Fsf, sf)
   In two dimensions, these two conditions must hold for both \eqn{M} and 
   \eqn{N}.
 }
-\references{
-  WAVELET SOFTWARE AT POLYTECHNIC UNIVERSITY, BROOKLYN, NY\cr
-  \url{http://eeweb.poly.edu/iselesni/WaveletSoftware/}
-}
 \seealso{
   \code{\link{FSfarras}}, \code{\link{farras}}, \code{\link{convolve}},
   \code{\link{cshift}}, \code{\link{afb}}, \code{\link{sfb}}.

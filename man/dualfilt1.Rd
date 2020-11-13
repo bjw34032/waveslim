@@ -23,9 +23,6 @@ dualfilt1()
   Kingsbury, N.G. (2000).  A dual-tree complex wavelet transform with
   improved orthogonality and symmetry properties, \emph{Proceedings of
     the IEEE Int. Conf. on Image Proc.} (ICIP).
-
-  WAVELET SOFTWARE AT POLYTECHNIC UNIVERSITY, BROOKLYN, NY\cr
-  \url{http://eeweb.poly.edu/iselesni/WaveletSoftware/}
 }
 \seealso{
   \code{\link{dualtree}}
