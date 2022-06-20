@@ -12,15 +12,15 @@ cshift2D(x, m)
 pm(a, b)
 }
 \arguments{
-  \item{x}{\eqn{N}-point vector}
+  \item{x}{N-point vector}
   \item{m}{amount of shift}
   \item{a,b}{input parameters}
 }
 \value{
-  \item{y}{vector \eqn{x} will be shifed by \eqn{m} samples to the left
-    or matrix \eqn{x} will be shifed by \eqn{m} samples down.}
-  \item{u}{\eqn{(a + b)/sqrt(2)}}
-  \item{v}{\eqn{(a - b)/sqrt(2)}}
+  \item{y}{vector \code{x} will be shifed by \code{m} samples to the left
+    or matrix \code{x} will be shifed by \code{m} samples down.}
+  \item{u}{(a + b) / sqrt(2)}
+  \item{v}{(a - b) / sqrt(2)}
 }
 %\details{}
 %\seealso{}

@@ -9,8 +9,8 @@
 convolve2D(x, y, conj = TRUE, type = c("circular", "open"))
 }
 \arguments{
-  \item{x}{\eqn{M{\times}N} matrix.}
-  \item{y}{numeric sequence of length \eqn{N}.}
+  \item{x}{MxN matrix.}
+  \item{y}{numeric sequence of length N.}
   \item{conj}{logical; if \code{TRUE}, take the complex \emph{conjugate}
      before back-transforming (default, and used for usual convolution).}
   \item{type}{character; one of \code{circular}, \code{open}
@@ -33,5 +33,5 @@ convolve2D(x, y, conj = TRUE, type = c("circular", "open"))
   \code{\link{convolve}}
 }
 %\examples{}
-\author{Brandon Whitcher}
+\author{B. Whitcher}
 \keyword{ts}

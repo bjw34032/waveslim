@@ -1,17 +1,17 @@
 ## Wavelet Variance
 
-wave.variance <- function(x, type="eta3", p=0.025) {
+wave.variance <- function(x, type = "eta3", p = 0.025) {
   ci.gaussian <- function(x, y, p) {
     find.first <- function(v) {
       na.length <- sum(is.na(v))
       v[na.length + 1]
     }
     x.acf <- lapply(x, FUN = my.acf)
-    Aj <- unlist(lapply(x.acf, FUN = function(v) sum(v*v, na.rm = TRUE))) -
+    Aj <- unlist(lapply(x.acf, FUN = function(v) sum(v * v, na.rm = TRUE))) -
       unlist(lapply(x.acf, FUN = find.first))^2 / 2
     wv.var <- 2 * Aj / unlist(lapply(x, FUN = function(v) sum(!is.na(v))))
     return(data.frame(wavevar = y, lower = y - qnorm(1-p) * sqrt(wv.var),
-                      upper = y + qnorm(1-p) * sqrt(wv.var)))
+                      upper = y + qnorm(1 - p) * sqrt(wv.var)))
   }
   
   ci.eta1 <- function(x, y, p) {

@@ -9,7 +9,7 @@
   associated with a binary tree structure corresponding to a
   partitioning of the frequency axis.
 }
-\usage{dwpt(x, wf="la8", n.levels=4, boundary="periodic")
+\usage{dwpt(x, wf = "la8", n.levels = 4, boundary = "periodic")
 idwpt(y, y.basis)
 modwpt(x, wf = "la8", n.levels = 4, boundary = "periodic")
 }
@@ -21,7 +21,7 @@ modwpt(x, wf = "la8", n.levels = 4, boundary = "periodic")
   \item{wf}{
     Name of the wavelet filter to use in the decomposition.  By default
     this is set to \code{"la8"}, the Daubechies orthonormal compactly
-    supported wavelet of length \eqn{L=8} (Daubechies, 1992), least
+    supported wavelet of length L=8 (Daubechies, 1992), least
     asymmetric family. 
   }
   \item{n.levels}{

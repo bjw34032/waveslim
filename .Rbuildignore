@@ -4,3 +4,4 @@
 ^DESCRIPTION\.bak$
 data/readdata\.R$
 data/old_txt\.zip$
+^.idea$

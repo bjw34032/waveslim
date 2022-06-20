@@ -1,12 +1,14 @@
 \name{brick.wall}
 \alias{brick.wall}
 \alias{dwpt.brick.wall}
+\alias{brick.wall.2d}
 \title{Replace Boundary Wavelet Coefficients with Missing Values}
 \description{
   Sets the first \eqn{n} wavelet coefficients to \code{NA}.
 }
 \usage{brick.wall(x, wf, method="modwt")
-dwpt.brick.wall(x, wf, n.levels, method="modwpt") 
+dwpt.brick.wall(x, wf, n.levels, method="modwpt")
+brick.wall.2d(x, method="modwt")
 }
 \arguments{
   \item{x}{DWT/MODWT/DWPT/MODWPT object}

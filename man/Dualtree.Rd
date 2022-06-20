@@ -15,7 +15,7 @@ dualtree2D(x, J, Faf, af)
 idualtree2D(w, J, Fsf, sf)
 }
 \arguments{
-  \item{x}{\eqn{N}-point vector or \eqn{M{\times}N}{MxN} matrix.}
+  \item{x}{N-point vector or MxN matrix.}
   \item{w}{DWT coefficients.}
   \item{J}{number of stages.}
   \item{Faf}{analysis filters for the first stage.}
@@ -26,7 +26,7 @@ idualtree2D(w, J, Fsf, sf)
 \value{
   For the analysis of \code{x}, the output is
   \item{w}{DWT coefficients.  Each wavelet scale is a list containing
-    the real and imaginary parts.  The final scale (\eqn{J+1}) contains
+    the real and imaginary parts.  The final scale (J+1) contains
     the low-pass filter coefficients.}
   For the synthesis of \code{w}, the output is 
   \item{y}{output signal}

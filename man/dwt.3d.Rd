@@ -13,7 +13,7 @@ idwt.3d(y)
   \item{x}{input array}
   \item{wf}{name of the wavelet filter to use in the decomposition}
   \item{J}{depth of the decomposition, must be a number less than or
-    equal to \eqn{\log_2(\min\{X,Y,Z\})}{log(min{Z,Y,Z},2)}}
+    equal to log(min{Z,Y,Z},2)}
   \item{boundary}{only \code{"periodic"} is currently implemented}
   \item{y}{an object of class \code{dwt.3d}}
 }

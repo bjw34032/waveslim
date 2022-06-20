@@ -15,8 +15,8 @@ FSfarras()
   None.
 }
 \value{
-  \item{af}{List (\eqn{i=1,2}) - analysis filters for tree \eqn{i}}
-  \item{sf}{List (\eqn{i=1,2}) - synthesis filters for tree \eqn{i}}
+  \item{af}{List (i=1,2) - analysis filters for tree i}
+  \item{sf}{List (i=1,2) - synthesis filters for tree i}
 }
 %\details{}
 \references{

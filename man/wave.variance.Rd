@@ -1,5 +1,6 @@
 \name{wave.variance}
 \alias{wave.variance}
+\alias{wave.variance.2d}
 \alias{wave.covariance}
 \alias{wave.correlation}
 \title{Wavelet Analysis of Univariate/Bivariate Time Series}
@@ -10,6 +11,7 @@
 \usage{wave.variance(x, type="eta3", p=0.025)
 wave.covariance(x, y)
 wave.correlation(x, y, N, p=0.975)
+wave.variance.2d(x, p=0.025)
 }
 \arguments{
   \item{x}{first time series}

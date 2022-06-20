@@ -15,8 +15,8 @@ dualfilt1()
   These cofficients are rounded to 8 decimal places.
 }
 \value{
-  \item{af}{List (\eqn{i=1,2}) - analysis filters for tree \eqn{i}}
-  \item{sf}{List (\eqn{i=1,2}) - synthesis filters for tree \eqn{i}}
+  \item{af}{List (i=1,2) - analysis filters for tree i}
+  \item{sf}{List (i=1,2) - synthesis filters for tree i}
   Note: \code{af[[2]]} is the reverse of \code{af[[1]]}.
 }
 \references{

@@ -13,7 +13,7 @@ idwt.2d(y)
   \item{x}{input matrix (image)}
   \item{wf}{name of the wavelet filter to use in the decomposition}
   \item{J}{depth of the decomposition, must be a number less than or
-    equal to \eqn{\log_2(\min\{M,N\})}{log(min{M,N},2)}}
+    equal to log(min{M,N},2)}
   \item{boundary}{only \code{"periodic"} is currently implemented}
   \item{y}{an object of class \code{dwt.2d}}
 }

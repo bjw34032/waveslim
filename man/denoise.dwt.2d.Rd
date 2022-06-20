@@ -16,7 +16,7 @@ denoise.modwt.2d(x, wf = "la8", J = 4, method = "universal", H = 0.5,
   \item{x}{input matrix (image)}
   \item{wf}{name of the wavelet filter to use in the decomposition}
   \item{J}{depth of the decomposition, must be a number less than or
-    equal to \eqn{\log_2(\min\{M,N\})}{log(min{M,N},2)}}
+    equal to log(min{M,N},2)}
   \item{method}{character string describing the threshold applied, only
     \code{"universal"} and \code{"long-memory"} are currently
     implemented}
@@ -43,7 +43,7 @@ denoise.modwt.2d(x, wf = "la8", J = 4, method = "universal", H = 0.5,
 \examples{
 ## Xbox image
 data(xbox)
-n <- NROW(xbox)
+n <- nrow(xbox)
 xbox.noise <- xbox + matrix(rnorm(n*n, sd=.15), n, n)
 par(mfrow=c(2,2), cex=.8, pty="s")
 image(xbox.noise, col=rainbow(128), main="Original Image")
@@ -54,7 +54,7 @@ image(xbox.noise - denoise.dwt.2d(xbox.noise, wf="haar"), col=rainbow(128),
 
 ## Daubechies image
 data(dau)
-n <- NROW(dau)
+n <- nrow(dau)
 dau.noise <- dau + matrix(rnorm(n*n, sd=10), n, n)
 par(mfrow=c(2,2), cex=.8, pty="s")
 image(dau.noise, col=rainbow(128), main="Original Image")

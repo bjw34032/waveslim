@@ -61,7 +61,7 @@ universal.thresh.modwt(wc, max.level = 4, hard = TRUE)
 
   Vidakovic, B. (1999)
   \emph{Statistical Modeling by Wavelets},
-  John Wiley \& Sons.
+  John Wiley and Sons.
 }
 %\seealso{}
 %\examples{}

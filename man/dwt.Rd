@@ -17,13 +17,12 @@ dwt.nondyadic(x)
   \item{wf}{
     Name of the wavelet filter to use in the decomposition.  By default
     this is set to \code{"la8"}, the Daubechies orthonormal compactly
-    supported wavelet of length \eqn{L=8} (Daubechies, 1992), least
+    supported wavelet of length L=8 (Daubechies, 1992), least
     asymmetric family. 
   }
   \item{n.levels}{
     Specifies the depth of the decomposition.  This must be a number
-    less than or equal to
-    \eqn{\log(\mbox{length}(x),2)}{log(length(x),2)}.
+    less than or equal to log(length(x),2).
   }
   \item{boundary}{
     Character string specifying the boundary condition.   If

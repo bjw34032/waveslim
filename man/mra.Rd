@@ -13,11 +13,10 @@
     \code{method="dwt"}.}
   \item{wf}{Name of the wavelet filter to use in the decomposition.  By
     default this is set to \code{"la8"}, the Daubechies orthonormal
-    compactly supported wavelet of length \eqn{L=8} least asymmetric
+    compactly supported wavelet of length L=8 least asymmetric
     family.}
   \item{J}{Specifies the depth of the decomposition.  This must be a
-    number less than or equal to
-    \eqn{\log(\mbox{length}(x),2)}{log(length(x),2)}.}
+    number less than or equal to log(length(x), 2).}
   \item{method}{Either \code{"dwt"} or \code{"modwt"}.}
   \item{boundary}{Character string specifying the boundary condition.
     If \code{boundary=="periodic"} the default, then the vector you
