@@ -1,3 +1,29 @@
+#' Select a Wavelet Filter
+#' 
+#' Converts name of wavelet filter to filter coefficients.
+#' 
+#' Simple \code{switch} statement selects the appropriate filter.
+#' 
+#' @param name Character string of wavelet filter.
+#' @return List containing the following items: \item{L}{Length of the wavelet
+#' filter.} \item{hpf}{High-pass filter coefficients.} \item{lpf}{Low-pass
+#' filter coefficients.}
+#' @author B. Whitcher
+#' @seealso \code{\link{wavelet.filter}}, \code{\link{squared.gain}}.
+#' @references Daubechies, I. (1992) \emph{Ten Lectures on Wavelets}, CBMS-NSF
+#' Regional Conference Series in Applied Mathematics, SIAM: Philadelphia.
+#' 
+#' Doroslovacki (1998) On the least asymmetric wavelets, \emph{IEEE
+#' Transactions for Signal Processing}, \bold{46}, No. 4, 1125-1130.
+#' 
+#' Morris and Peravali (1999) Minimum-bandwidth discrete-time wavelets,
+#' \emph{Signal Processing}, \bold{76}, No. 2, 181-193.
+#' 
+#' Nielsen, M. (2000) On the Construction and Frequency Localization of
+#' Orthogonal Quadrature Filters, \emph{Journal of Approximation Theory},
+#' \bold{108}, No. 1, 36-52.
+#' @keywords ts
+#' @export wave.filter
 wave.filter <- function(name)
 {
   select.haar <- function() {
@@ -211,6 +237,30 @@ wave.filter <- function(name)
     stop("Invalid selection for wave.filter"))
 }
 
+
+
+#' Quadrature Mirror Filter
+#' 
+#' Computes the quadrature mirror filter from a given filter.
+#' 
+#' None.
+#' 
+#' @param g Filter coefficients.
+#' @param low2high Logical, default is \code{TRUE} which means a low-pass
+#' filter is input and a high-pass filter is output.  Setting \code{low2high=F}
+#' performs the inverse.
+#' @return Quadrature mirror filter.
+#' @author B. Whitcher
+#' @seealso \code{\link{wave.filter}}.
+#' @references Any basic signal processing text.
+#' @keywords ts
+#' @examples
+#' 
+#' ## Haar wavelet filter
+#' g <- wave.filter("haar")$lpf
+#' qmf(g)
+#' 
+#' @export qmf
 qmf <- function(g, low2high = TRUE) {
   L <- length(g)
   if(low2high)

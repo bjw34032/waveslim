@@ -1,5 +1,36 @@
-########################################################################
-
+#' Discrete Hilbert Wavelet Transforms
+#' 
+#' The discrete Hilbert wavelet transforms (DHWTs) for seasonal and
+#' time-varying time series analysis.  Transforms include the usual orthogonal
+#' (decimated), maximal-overlap (non-decimated) and maximal-overlap packet
+#' transforms.
+#' 
+#' @usage dwt.hilbert(x, wf, n.levels = 4, boundary = "periodic", ...)
+#' @usage dwt.hilbert.nondyadic(x, ...) 
+#' @usage idwt.hilbert(y)
+#' @usage modwt.hilbert(x, wf, n.levels = 4, boundary = "periodic", ...)
+#' @usage imodwt.hilbert(y)
+#' @usage modwpt.hilbert(x, wf, n.levels = 4, boundary = "periodic")
+#' @aliases dwt.hilbert dwt.hilbert.nondyadic idwt.hilbert modwt.hilbert
+#' imodwt.hilbert modwpt.hilbert
+#' @param x Real-valued time series or vector of observations.
+#' @param wf Hilbert wavelet pair
+#' @param n.levels Number of levels (depth) of the wavelet transform.
+#' @param boundary Boundary treatment, currently only \code{periodic} and
+#' \code{reflection}.
+#' @param \ldots Additional parametes to be passed on.
+#' @param y An object of S3 class \code{dwt.hilbert}.
+#' @return Hilbert wavelet transform object (list).
+#' @author B. Whitcher
+#' @seealso \code{\link{hilbert.filter}}
+#' @references Selesnick, I. (200X). \emph{IEEE Signal Processing Magazine}
+#' 
+#' Selesnick, I. (200X). \emph{IEEE Transactions in Signal Processing}
+#' 
+#' Whither, B. and P.F. Craigmile (2004). Multivariate Spectral Analysis Using
+#' Hilbert Wavelet Pairs, \emph{International Journal of Wavelets,
+#' Multiresolution and Information Processing}, \bold{2}(4), 567--587.
+#' @keywords ts
 dwt.hilbert <- function(x, wf, n.levels=4, boundary="periodic", ...) {
   switch(boundary,
          "reflection" =  x <- c(x, rev(x)),
@@ -59,7 +90,7 @@ dwt.hilbert.nondyadic <- function(x, ...) {
 
 idwt.hilbert <- function(y) {
   switch(attributes(y)$boundary,
-    "reflection" =  x <- c(x, rev(x)),
+    "reflection" =  y <- c(y, rev(y)),
     "periodic" = invisible(),
     stop("Invalid boundary rule in dwt.dbp"))
   J <- attributes(y)$levels
@@ -145,6 +176,39 @@ imodwt.hilbert <- function(y) {
 
 ########################################################################
 
+
+
+#' Select a Hilbert Wavelet Pair
+#' 
+#' Converts name of Hilbert wavelet pair to filter coefficients.
+#' 
+#' Simple \code{switch} statement selects the appropriate HWP.  There are two
+#' parameters that define a Hilbert wavelet pair using the notation of
+#' Selesnick (2001,2002), \eqn{K} and \eqn{L}.  Currently, the only implemented
+#' combinations \eqn{(K,L)} are (3,3), (3,5), (4,2) and (4,4).
+#' 
+#' @param name Character string of Hilbert wavelet pair, see acceptable names
+#' below (e.g., \code{"k3l3"}).
+#' @return List containing the following items: \item{L}{length of the wavelet
+#' filter} \item{h0,g0}{low-pass filter coefficients} \item{h1,g1}{high-pass
+#' filter coefficients}
+#' @author B. Whitcher
+#' @seealso \code{\link{wave.filter}}
+#' @references Selesnick, I.W. (2001). Hilbert transform pairs of wavelet
+#' bases. \emph{IEEE Signal Processing Letters} \bold{8}(6), 170--173.
+#' 
+#' Selesnick, I.W. (2002). The design of approximate Hilbert transform pairs
+#' of wavelet bases. \emph{IEEE Transactions on Signal Processing} 
+#' \bold{50}(5), 1144--1152.
+#' @keywords ts
+#' @examples
+#' 
+#' hilbert.filter("k3l3")
+#' hilbert.filter("k3l5")
+#' hilbert.filter("k4l2")
+#' hilbert.filter("k4l4")
+#' 
+#' @export hilbert.filter
 hilbert.filter <- function(name) {
   select.K3L3 <- function() {
     L <- 12
@@ -279,6 +343,28 @@ hilbert.filter <- function(name) {
 
 ########################################################################
 
+
+
+#' Phase Shift for Hilbert Wavelet Coefficients
+#' 
+#' Wavelet coefficients are circularly shifted by the amount of phase shift
+#' induced by the discrete Hilbert wavelet transform.
+#' 
+#' The "center-of-energy" argument of Hess-Nielsen and Wickerhauser (1996) is
+#' used to provide a flexible way to circularly shift wavelet coefficients
+#' regardless of the wavelet filter used.
+#' 
+#' @aliases phase.shift.hilbert phase.shift.hilbert.packet
+#' @param x Discete Hilbert wavelet transform (DHWT) object.
+#' @param wf character string; Hilbert wavelet pair used in DHWT
+#' @return DHWT (DHWPT) object with coefficients circularly shifted.
+#' @author B. Whitcher
+#' @seealso \code{\link{phase.shift}}
+#' @references Hess-Nielsen, N. and M. V. Wickerhauser (1996) Wavelets and
+#' time-frequency analysis, \emph{Proceedings of the IEEE}, \bold{84}, No. 4,
+#' 523-540.
+#' @keywords ts
+#' @export phase.shift.hilbert
 phase.shift.hilbert <- function(x, wf) {
   coe <- function(g)
     sum(0:(length(g)-1) * g^2) / sum(g^2)
@@ -393,8 +479,42 @@ phase.shift.hilbert.packet <- function(x, wf) {
   return(x)
 }
 
-########################################################################
-
+#' Time-varying and Seasonal Analysis Using Hilbert Wavelet Pairs
+#' 
+#' Performs time-varying or seasonal coherence and phase anlaysis between two
+#' time seris using the maximal-overlap discrete Hilbert wavelet transform
+#' (MODHWT).
+#' 
+#' The idea of seasonally-varying spectral analysis (SVSA, Madden 1986) is
+#' generalized using the MODWT and Hilbert wavelet pairs.  For the seasonal
+#' case, \eqn{S} seasons are used to produce a consistent estimate of the
+#' coherence and phase.  For the non-seasonal case, a simple rectangular
+#' (moving-average) filter is applied to the MODHWT coefficients in order to
+#' produce consistent estimates.
+#' 
+#' @usage modhwt.coh(x, y, f.length = 0)
+#' @usage modhwt.phase(x, y, f.length = 0)
+#' @usage modhwt.coh.seasonal(x, y, S = 10, season = 365)
+#' @usage modhwt.phase.seasonal(x, y, season = 365)
+#' @aliases modhwt.coh modhwt.phase modhwt.coh.seasonal modhwt.phase.seasonal
+#' @param x MODHWT object.
+#' @param y MODHWT object.
+#' @param f.length Length of the rectangular filter.
+#' @param S Number of "seasons".
+#' @param season Length of the "season".
+#' @return Time-varying or seasonal coherence and phase between two time
+#' series.  The coherence estimates are between zero and one, while the phase
+#' estimates are between \eqn{-\pi}{-pi} and \eqn{\pi}{pi}.
+#' @author B. Whitcher
+#' @seealso \code{\link{hilbert.filter}}
+#' @references Madden, R.A. (1986). Seasonal variation of the 40--50 day
+#' oscillation in the tropics. \emph{Journal of the Atmospheric Sciences}
+#' \bold{43}(24), 3138--3158.
+#' 
+#' Whither, B. and P.F. Craigmile (2004). Multivariate Spectral Analysis Using
+#' Hilbert Wavelet Pairs, \emph{International Journal of Wavelets,
+#' Multiresolution and Information Processing}, \bold{2}(4), 567--587.
+#' @keywords ts
 modhwt.coh <- function(x, y, f.length = 0) {
   filt <- rep(1, f.length + 1)
   filt <- filt / length(filt)

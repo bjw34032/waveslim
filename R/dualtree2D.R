@@ -101,6 +101,33 @@ cshift2D <- function(x, m) {
   return(y)
 }
 
+
+
+#' Fast Column-wise Convolution of a Matrix
+#' 
+#' Use the Fast Fourier Transform to perform convolutions between a sequence
+#' and each column of a matrix.
+#' 
+#' This is a corrupted version of \code{convolve} made by replacing \code{fft}
+#' with \code{mvfft} in a few places.  It would be nice to submit this to the R
+#' Developers for inclusion.
+#' 
+#' @param x MxN matrix.
+#' @param y numeric sequence of length N.
+#' @param conj logical; if \code{TRUE}, take the complex \emph{conjugate}
+#' before back-transforming (default, and used for usual convolution).
+#' @param type character; one of \code{circular}, \code{open} (beginning of
+#' word is ok).  For \code{circular}, the two sequences are treated as
+#' \emph{circular}, i.e., periodic.
+#' 
+#' For \code{open} and \code{filter}, the sequences are padded with zeros (from
+#' left and right) first; \code{filter} returns the middle sub-vector of
+#' \code{open}, namely, the result of running a weighted mean of \code{x} with
+#' weights \code{y}.
+#' @author B. Whitcher
+#' @seealso \code{\link{convolve}}
+#' @keywords ts
+#' @export convolve2D
 convolve2D <- function(x, y, conj=TRUE, type=c("circular", "open")) {
   ## Generalize convolve to handle vector arrays by calling mvfft()
   type <- match.arg(type)

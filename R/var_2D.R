@@ -16,6 +16,25 @@ brick.wall.2d <- function (x, method = "modwt") {
   return(x)
 }
 
+#' Wavelet Analysis of Images
+#' 
+#' Produces an estimate of the multiscale variance with approximate 
+#' confidence intervals using the 2D MODWT.
+#' 
+#' The wavelet variance is basically the average of the squared wavelet 
+#' coefficients across each scale and direction of an image. As shown 
+#' in Mondal and Percival (2012), the wavelet variance is a 
+#' scale-by-scale decomposition of the variance for a stationary spatial
+#' process, and certain non-stationary spatial processes.
+#' 
+#' @param x image
+#' @param p (one minus the) two-sided p-value for the confidence interval
+#' @return Data frame with 3J+1 rows.
+#' @author B. Whitcher
+#' @references Mondal, D. and D. B. Percival (2012). Wavelet variance 
+#' analysis for random fields on a regular lattice. \emph{IEEE 
+#' Transactions on Image Processing} \bold{21}, 537–549.
+#'
 wave.variance.2d <- function(x, p = 0.025) {
   
   # The unbiased estimator ignores those coefficients affected by the boundary

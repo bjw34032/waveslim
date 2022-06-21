@@ -2,6 +2,25 @@
 ###########################################################################
 ###########################################################################
 
+
+
+#' Three Dimensional Separable Discrete Wavelet Transform
+#' 
+#' Three-dimensional separable discrete wavelet transform (DWT).
+#' 
+#' 
+#' @usage dwt.3d(x, wf, J = 4, boundary = "periodic")
+#' @usage idwt.3d(y)
+#' @aliases dwt.3d idwt.3d
+#' @param x input array
+#' @param wf name of the wavelet filter to use in the decomposition
+#' @param J depth of the decomposition, must be a number less than or equal to
+#' log(minZ,Y,Z,2)
+#' @param boundary only \code{"periodic"} is currently implemented
+#' @param y an object of class \code{dwt.3d}
+#' @author B. Whitcher
+#' @keywords ts
+#' @export dwt.3d
 dwt.3d <- function(x, wf, J=4, boundary="periodic")
 {
   nx <- dim(x)[1]
@@ -108,10 +127,26 @@ idwt.3d <- function(y)
   zapsmall(y.in)
 }
 
-###########################################################################
-###########################################################################
-###########################################################################
 
+
+#' Three Dimensional Separable Maximal Ovelrap Discrete Wavelet Transform
+#' 
+#' Three-dimensional separable maximal overlap discrete wavelet transform
+#' (MODWT).
+#' 
+#' 
+#' @usage modwt.3d(x, wf, J = 4, boundary = "periodic")
+#' @usage imodwt.3d(y)
+#' @aliases modwt.3d imodwt.3d
+#' @param x input array
+#' @param wf name of the wavelet filter to use in the decomposition
+#' @param J depth of the decomposition
+#' @param boundary only \code{"periodic"} is currently implemented
+#' @param y an object of class \code{modwt.3d}
+#' @author B. Whitcher
+#' @keywords ts
+#' @export modwt.3d 
+#' @export imodwt.3d
 modwt.3d <- function(x, wf, J=4, boundary="periodic")
 {
   nx <- dim(x)[1]
@@ -222,8 +257,44 @@ imodwt.3d <- function(y)
 ###########################################################################
 ###########################################################################
 
-mra.3d <-
-  function(x, wf="la8", J=4, method="modwt", boundary="periodic")
+
+
+#' Three Dimensional Multiresolution Analysis
+#' 
+#' This function performs a level \eqn{J} additive decomposition of the input
+#' array using the pyramid algorithm (Mallat 1989).
+#' 
+#' This code implements a three-dimensional multiresolution analysis by
+#' performing the one-dimensional pyramid algorithm (Mallat 1989) on each
+#' dimension of the input array.  Either the DWT or MODWT may be used to
+#' compute the multiresolution analysis, which is an additive decomposition of
+#' the original array.
+#' 
+#' @param x A three-dimensional array containing the data be to decomposed.
+#' This must be have dyadic length in all three dimensions (but not necessarily
+#' the same) for \code{method="dwt"}.
+#' @param wf Name of the wavelet filter to use in the decomposition.  By
+#' default this is set to \code{"la8"}, the Daubechies orthonormal compactly
+#' supported wavelet of length \eqn{L=8} least asymmetric family.
+#' @param J Specifies the depth of the decomposition.  This must be a number
+#' less than or equal to \eqn{\log(\mbox{length}(x),2)}{log(length(x),2)}.
+#' @param method Either \code{"dwt"} or \code{"modwt"}.
+#' @param boundary Character string specifying the boundary condition.  If
+#' \code{boundary=="periodic"} the default and only method implemented, then
+#' the matrix you decompose is assumed to be periodic on its defined interval.
+#' @return List structure containing the filter triplets associated with the
+#' multiresolution analysis.
+#' @author B. Whitcher
+#' @seealso \code{\link{dwt.3d}}, \code{\link{modwt.3d}}
+#' @references Mallat, S. G. (1989) A theory for multiresolution signal
+#' decomposition: the wavelet representation, \emph{IEEE Transactions on
+#' Pattern Analysis and Machine Intelligence}, \bold{11}, No. 7, 674-693.
+#' 
+#' Mallat, S. G. (1998) \emph{A Wavelet Tour of Signal Processing}, Academic
+#' Press.
+#' @keywords ts
+#' @export mra.3d
+mra.3d <- function(x, wf="la8", J=4, method="modwt", boundary="periodic")
 {
   nx <- dim(x)[1]
   ny <- dim(x)[2]

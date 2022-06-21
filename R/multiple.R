@@ -1,3 +1,28 @@
+#' Rotated Cumulative Variance
+#' 
+#' Provides the normalized cumulative sums of squares from a sequence of
+#' coefficients with the diagonal line removed.
+#' 
+#' The rotated cumulative variance, when plotted, provides a qualitative way to
+#' study the time dependence of the variance of a series.  If the variance is
+#' stationary over time, then only small deviations from zero should be
+#' present.  If on the other hand the variance is non-stationary, then large
+#' departures may exist.  Formal hypothesis testing may be performed based on
+#' boundary crossings of Brownian bridge processes.
+#' 
+#' @param x vector of coefficients to be cumulatively summed (missing values
+#' excluded)
+#' @return Vector of coefficients that are the sumulative sum of squared input
+#' coefficients.
+#' @author B. Whitcher
+#' @references Gencay, R., F. Selcuk and B. Whitcher (2001) \emph{An
+#' Introduction to Wavelets and Other Filtering Methods in Finance and
+#' Economics}, Academic Press.
+#' 
+#' Percival, D. B. and A. T. Walden (2000) \emph{Wavelet Methods for Time
+#' Series Analysis}, Cambridge University Press.
+#' @keywords ts
+#' @export rotcumvar
 rotcumvar <- function(x) {
   x <- x[!is.na(x)]
   n <- length(x)
@@ -6,6 +31,43 @@ rotcumvar <- function(x) {
   pmax(abs(plus), abs(minus))
 }
 
+
+
+#' Testing for Homogeneity of Variance
+#' 
+#' A recursive algorithm for detecting and locating multiple variance change
+#' points in a sequence of random variables with long-range dependence.
+#' 
+#' For details see Section 9.6 of Percival and Walden (2000) or Section 7.3 in
+#' Gencay, Selcuk and Whitcher (2001).
+#' 
+#' @param x Sequence of observations from a (long memory) time series.
+#' @param wf Name of the wavelet filter to use in the decomposition.
+#' @param J Specifies the depth of the decomposition.  This must be a number
+#' less than or equal to \eqn{\log(\mbox{length}(x),2)}{log(length(x),2)}.
+#' @param min.coef Minimum number of wavelet coefficients for testing purposes.
+#' Empirical results suggest that 128 is a reasonable number in order to apply
+#' asymptotic critical values.
+#' @param debug Boolean variable: if set to \code{TRUE}, actions taken by the
+#' algorithm are printed to the screen.
+#' @return Matrix whose columns include (1) the level of the wavelet transform
+#' where the variance change occurs, (2) the value of the test statistic, (3)
+#' the DWT coefficient where the change point is located, (4) the MODWT
+#' coefficient where the change point is located.  Note, there is currently no
+#' checking that the MODWT is contained within the associated support of the
+#' DWT coefficient.  This could lead to incorrect estimates of the location of
+#' the variance change.
+#' @author B. Whitcher
+#' @seealso \code{\link{dwt}}, \code{\link{modwt}}, \code{\link{rotcumvar}},
+#' \code{\link{mult.loc}}.
+#' @references Gencay, R., F. Selcuk and B. Whitcher (2001) \emph{An
+#' Introduction to Wavelets and Other Filtering Methods in Finance and
+#' Economics}, Academic Press.
+#' 
+#' Percival, D. B. and A. T. Walden (2000) \emph{Wavelet Methods for Time
+#' Series Analysis}, Cambridge University Press.
+#' @keywords ts
+#' @export testing.hov
 testing.hov <- function(x, wf, J, min.coef=128, debug=FALSE) {
   n <- length(x)
   change.points <- NULL
@@ -35,6 +97,35 @@ testing.hov <- function(x, wf, J, min.coef=128, debug=FALSE) {
   return(change.points)
 }
 
+
+
+#' Wavelet-based Testing and Locating for Variance Change Points
+#' 
+#' This is the major subroutine for \code{\link{testing.hov}}, providing the
+#' workhorse algorithm to recursively test and locate multiple variance changes
+#' in so-called long memory processes.
+#' 
+#' For details see Section 9.6 of Percival and Walden (2000) or Section 7.3 in
+#' Gencay, Selcuk and Whitcher (2001).
+#' 
+#' @param dwt.list List of wavelet vector coefficients from the \code{dwt}.
+#' @param modwt.list List of wavelet vector coefficients from the \code{modwt}.
+#' @param wf Name of the wavelet filter to use in the decomposition.
+#' @param level Specifies the depth of the decomposition.
+#' @param min.coef Minimum number of wavelet coefficients for testing purposes.
+#' @param debug Boolean variable: if set to \code{TRUE}, actions taken by the
+#' algorithm are printed to the screen.
+#' @return Matrix.
+#' @author B. Whitcher
+#' @seealso \code{\link{rotcumvar}}, \code{\link{testing.hov}}.
+#' @references Gencay, R., F. Selcuk and B. Whitcher (2001) \emph{An
+#' Introduction to Wavelets and Other Filtering Methods in Finance and
+#' Economics}, Academic Press.
+#' 
+#' Percival, D. B. and A. T. Walden (2000) \emph{Wavelet Methods for Time
+#' Series Analysis}, Cambridge University Press.
+#' @keywords ts
+#' @export mult.loc
 mult.loc <- function(dwt.list, modwt.list, wf, level, min.coef, debug)
 {
   Nj <- length(dwt.list$dwt)

@@ -1,3 +1,48 @@
+#' Wavelet Shrinkage via Thresholding
+#' 
+#' Perform wavelet shrinkage using data-analytic, hybrid SURE, manual, SURE, or
+#' universal thresholding.
+#' 
+#' An extensive amount of literature has been written on wavelet shrinkage.
+#' The functions here represent the most basic approaches to the problem of
+#' nonparametric function estimation.  See the references for further
+#' information.
+#' 
+#' @usage da.thresh(wc, alpha = .05, max.level = 4, verbose = FALSE, return.thresh = FALSE)
+#' @usage hybrid.thresh(wc, max.level = 4, verbose = FALSE, seed = 0)
+#' @usage manual.thresh(wc, max.level = 4, value, hard = TRUE)
+#' @usage sure.thresh(wc, max.level = 4, hard = TRUE)
+#' @usage universal.thresh(wc, max.level = 4, hard = TRUE)
+#' @usage universal.thresh.modwt(wc, max.level = 4, hard = TRUE)
+#' @aliases Thresholding da.thresh hybrid.thresh manual.thresh sure.thresh
+#' universal.thresh universal.thresh.modwt bishrink soft
+#' @param wc wavelet coefficients
+#' @param alpha level of the hypothesis tests
+#' @param max.level maximum level of coefficients to be affected by threshold
+#' @param verbose if \code{verbose=TRUE} then information is printed to the
+#' screen
+#' @param value threshold value (only utilized in \code{manual.thresh})
+#' @param hard Boolean value, if \code{hard=F} then soft thresholding is used
+#' @param seed sets random seed (only utilized in \code{hybrid.thresh})
+#' @param return.thresh if \code{return.thresh=TRUE} then the vector of
+#' threshold values is returned, otherwise the surviving wavelet coefficients
+#' are returned
+#' @return The default output is a list structure, the same length as was
+#' input, containing only those wavelet coefficients surviving the threshold.
+#' @author B. Whitcher (some code taken from R. Todd Ogden)
+#' @references Gencay, R., F. Selcuk and B. Whitcher (2001) \emph{An
+#' Introduction to Wavelets and Other Filtering Methods in Finance and
+#' Economics}, Academic Press.
+#' 
+#' Ogden, R. T. (1996) \emph{Essential Wavelets for Statistical Applications
+#' and Data Analysis}, Birkhauser.
+#' 
+#' Percival, D. B. and A. T. Walden (2000) \emph{Wavelet Methods for Time
+#' Series Analysis}, Cambridge University Press.
+#' 
+#' Vidakovic, B. (1999) \emph{Statistical Modeling by Wavelets}, John Wiley and
+#' Sons.
+#' @keywords ts
 manual.thresh <- function(wc, max.level=4, value, hard=TRUE)
 {
   wc.fine <- wc[["d1"]]

@@ -1,3 +1,44 @@
+#' Circularly Shift Matrices from a 2D MODWT
+#' 
+#' Compute phase shifts for wavelet sub-matrices based on the ``center of
+#' energy'' argument of Hess-Nielsen and Wickerhauser (1996).
+#' 
+#' The "center of energy" technique of Wickerhauser and Hess-Nielsen (1996) is
+#' employed to find circular shifts for the wavelet sub-matrices such that the
+#' coefficients are aligned with the original series.  This corresponds to
+#' applying a (near) linear-phase filtering operation.
+#' 
+#' @param z Two-dimensional MODWT object
+#' @param inverse Boolean value on whether to perform the forward or inverse
+#' operation.
+#' @return Two-dimensional MODWT object with circularly shifted coefficients.
+#' @author B. Whitcher
+#' @seealso \code{\link{phase.shift}}, \code{\link{modwt.2d}}.
+#' @references Hess-Nielsen, N. and M. V. Wickerhauser (1996) Wavelets and
+#' time-frequency analysis, \emph{Proceedings of the IEEE}, \bold{84}, No. 4,
+#' 523-540.
+#' 
+#' Percival, D. B. and A. T. Walden (2000) \emph{Wavelet Methods for Time
+#' Series Analysis}, Cambridge University Press.
+#' @keywords ts
+#' @examples
+#' 
+#' n <- 512
+#' G1 <- G2 <- dnorm(seq(-n/4, n/4, length=n))
+#' G <- 100 * zapsmall(outer(G1, G2))
+#' G <- modwt.2d(G, wf="la8", J=6)
+#' k <- 50
+#' xr <- yr <- trunc(n/2) + (-k:k)
+#' par(mfrow=c(3,3), mar=c(1,1,2,1), pty="s")
+#' for (j in names(G)[1:9]) {
+#'   image(G[[j]][xr,yr], col=rainbow(64), axes=FALSE, main=j)
+#' }
+#' Gs <- shift.2d(G)
+#' for (j in names(G)[1:9]) {
+#'   image(Gs[[j]][xr,yr], col=rainbow(64), axes=FALSE, main=j)
+#' }
+#' 
+#' @export shift.2d
 shift.2d <- function(z, inverse=FALSE) {
   ## "Center of Energy"
   coe <- function(g) { 

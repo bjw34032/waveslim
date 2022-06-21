@@ -1,3 +1,20 @@
+#' Stack Plot
+#' 
+#' Stack plot of an object.  This function attempts to mimic a function called
+#' \code{stack.plot} in S+WAVELETS.
+#' 
+#' Produces a set of plots, one for each element (column) of \code{x}.
+#' 
+#' @param x \code{ts} object
+#' @param layout Doublet defining the dimension of the panel.  If not
+#' specified, the dimensions are chosen automatically.
+#' @param same.scale Vector the same length as the number of series to be
+#' plotted.  If not specified, all panels will have unique axes.
+#' @param plot.type,panel,log,col,bg,pch,cex,lty,lwd,ann,xlab,main,oma,... See
+#' \code{plot.ts}.
+#' @author B. Whitcher
+#' @keywords hplot
+#' @export stackPlot
 stackPlot <-
   function (x, plot.type = c("multiple", "single"), panel = lines, 
     log = "", col = par("col"), bg = NA, pch = par("pch"), cex = par("cex"),

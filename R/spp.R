@@ -1,3 +1,38 @@
+#' Wavelet-based Maximum Likelihood Estimation for Seasonal Persistent
+#' Processes
+#' 
+#' Parameter estimation for a seasonal persistent (seasonal long-memory)
+#' process is performed via maximum likelihood on the wavelet coefficients.
+#' 
+#' The variance-covariance matrix of the original time series is approximated
+#' by its wavelet-based equivalent.  A Whittle-type likelihood is then
+#' constructed where the sums of squared wavelet coefficients are compared to
+#' bandpass filtered version of the true spectral density function.
+#' Minimization occurs for the fractional difference parameter \eqn{d} and the
+#' Gegenbauer frequency \eqn{f_G}, while the innovations variance is
+#' subsequently estimated.
+#' 
+#' @usage spp.mle(y, wf, J = log(length(y), 2) - 1, p = 0.01, frac = 1)
+#' @usage spp2.mle(y, wf, J = log(length(y), 2) - 1, p = 0.01, dyadic = TRUE, frac = 1)
+#' @aliases spp.mle spp2.mle
+#' @param y Not necessarily dyadic length time series.
+#' @param wf Name of the wavelet filter to use in the decomposition.  See
+#' \code{\link{wave.filter}} for those wavelet filters available.
+#' @param J Depth of the discrete wavelet packet transform.
+#' @param p Level of significance for the white noise testing procedure.
+#' @param dyadic Logical parameter indicating whether or not the original time
+#' series is dyadic in length.
+#' @param frac Fraction of the time series that should be used in constructing
+#' the likelihood function.
+#' @return List containing the maximum likelihood estimates (MLEs) of
+#' \eqn{\delta}, \eqn{f_G} and \eqn{\sigma^2}, along with the value of the
+#' likelihood for those estimates.
+#' @author B. Whitcher
+#' @seealso \code{\link{fdp.mle}}
+#' @references Whitcher, B. (2004) Wavelet-based estimation for seasonal
+#' long-memory processes, \emph{Technometrics}, \bold{46}, No. 2, 225-238.
+#' @keywords ts
+#' @export spp.mle
 spp.mle <- function(y, wf, J=log(length(y),2)-1, p=0.01, frac=1)
 {
   sppLL <- function(x, y) {
