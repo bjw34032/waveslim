@@ -25,9 +25,6 @@ Riedel, K. S. and A. Sidorenko (1995) Minimum bias multiple
 taper spectral estimation, \emph{IEEE Transactions on Signal Processing},
 \bold{43}, 188-195.
 }
-\seealso{
-\code{\link{dpss.taper}}.
-}
 \author{
 B. Whitcher
 }

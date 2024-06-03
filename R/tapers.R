@@ -29,7 +29,6 @@ dpss.taper <- function(n, k, nw = 4) {
 #' @param k number of data tapers
 #' @return A vector or matrix of data tapers (cols = tapers).
 #' @author B. Whitcher
-#' @seealso \code{\link{dpss.taper}}.
 #' @references Riedel, K. S. and A. Sidorenko (1995) Minimum bias multiple
 #' taper spectral estimation, \emph{IEEE Transactions on Signal Processing},
 #' \bold{43}, 188-195.
