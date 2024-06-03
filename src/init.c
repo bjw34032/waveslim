@@ -21,9 +21,6 @@ extern void two_D_idwt(void *, void *, void *, void *, void *, void *, void *, v
 extern void two_D_imodwt(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern void two_D_modwt(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 
-/* .Fortran calls */
-extern void F77_NAME(dpss)(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
-
 static const R_CMethodDef CEntries[] = {
     {"dwt",            (DL_FUNC) &dwt,             7},
     {"hosking",        (DL_FUNC) &hosking,         3},
@@ -41,13 +38,8 @@ static const R_CMethodDef CEntries[] = {
     {NULL, NULL, 0}
 };
 
-static const R_FortranMethodDef FortranEntries[] = {
-    {"dpss", (DL_FUNC) &F77_NAME(dpss), 12},
-    {NULL, NULL, 0}
-};
-
 void R_init_waveslim(DllInfo *dll)
 {
-    R_registerRoutines(dll, CEntries, NULL, FortranEntries, NULL);
+    R_registerRoutines(dll, CEntries, NULL, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

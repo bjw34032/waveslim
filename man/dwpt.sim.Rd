@@ -29,7 +29,7 @@ Time series of length \code{N}.
 \description{
 A seasonal persistent process may be characterized by a spectral density
 function with an asymptote occuring at a particular frequency in
-[0,1/2).  It's time domain representation was first
+\eqn{[0,\frac{1}{2})}{[0,1/2)}.  It's time domain representation was first
 noted in passing by Hosking (1981).  Although an exact time-domain approach
 to simulation is possible, this function utilizes the discrete wavelet
 packet transform (DWPT).
@@ -38,7 +38,7 @@ packet transform (DWPT).
 Two subroutines are used, the first selects an adaptive orthonormal basis
 for the true spectral density function (SDF) while the second computes the
 bandpass variances associated with the chosen orthonormal basis and SDF.
-Finally, when \code{M} > \code{N} a uniform random variable is
+Finally, when \eqn{M>N}{\code{M} > \code{N}} a uniform random variable is
 generated in order to select a random piece of the simulated time series.
 For more details see Whitcher (2001).
 }

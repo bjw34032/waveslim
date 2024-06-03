@@ -121,7 +121,8 @@ wave.variance <- function(x, type = "eta3", p = 0.025) {
     x.ss <- unlist(lapply(x, FUN=function(v)v[!is.na(v)]^2))
     mt.var <- numeric(J)
     for(j in 1:J) { 
-      x.dpss <- dpss.taper(x.length[j], K, 4)
+      # Return the matrix of Slepian Sequences only (ignore the eigenvalues)
+      x.dpss <- dpss(x.length[j], K, 4)$v
       V <- apply(x.dpss, 2, sum)
       J <- apply(x.dpss * x.ss[[j]], 2, sum)
       mt.var[j] <- sum((J - y[j] * V)^2) / K / x.length[j]
